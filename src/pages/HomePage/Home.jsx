@@ -18,6 +18,7 @@ const Home = () => {
     <div>
 
       <div className={styles.navigate}>
+
         <button className={styles.nav_button} onClick={() => setCategory(1)}>Фитиль</button>
         <button className={styles.nav_button} onClick={() => setCategory(2)}>Спрей</button>
         <button className={styles.nav_button} onClick={() => setCategory(3)}>Диффузор</button>
