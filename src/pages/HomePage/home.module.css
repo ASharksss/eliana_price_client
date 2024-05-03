@@ -1,0 +1,26 @@
+.nav_button {
+    width: 82px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid #b45028;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.nav_button:hover {
+    background-color: #a02f12;
+    color: white;
+}
+
+.nav_button + .nav_button {
+    margin-left: 10px;
+}
+
+.navigate {
+    margin-bottom: 40px;
+}
+
+.title {
+    margin-bottom: 10px;
+}

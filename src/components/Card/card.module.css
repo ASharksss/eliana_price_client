@@ -1,0 +1,37 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 155px;
+    height: 150px;
+    box-shadow: 0px 4px 30px 0px #094B9D1A;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.button {
+    height: 30px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid #ad3939;
+    color: #a02f12;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 375px) {
+    .card {
+        width: 145px;
+    }
+}
+
