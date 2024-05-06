@@ -1,0 +1,8 @@
+.block + .block {
+    margin-top: 30px;
+}
+
+.block h1 {
+    margin-bottom: 16px;
+    font-size: 22px;
+}

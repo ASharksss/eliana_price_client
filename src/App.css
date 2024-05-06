@@ -20,9 +20,23 @@ body {
     grid-template-columns: repeat(6, 1fr);
 }
 
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+.noLink {
+    text-decoration: none;
+}
+
 @media screen and (max-width: 1024px) {
     .grid {
-        grid-template-columns: repeat(4,1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .App {
@@ -32,7 +46,7 @@ body {
 
 @media screen and (max-width: 778px) {
     .grid {
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .App {
@@ -42,7 +56,7 @@ body {
 
 @media screen and (max-width: 375px) {
     .grid {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .App {
