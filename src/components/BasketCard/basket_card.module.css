@@ -1,4 +1,5 @@
 .card {
+    width: 700px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -51,12 +52,24 @@
     color: white;
 }
 
+@media screen and (max-width: 768px) {
+    .card {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 80px;
+        padding: 12px;
+    }
+}
+
 @media screen and (max-width: 385px) {
     .title {
         font-size: 15px;
     }
 
     .card {
+        width: 340px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

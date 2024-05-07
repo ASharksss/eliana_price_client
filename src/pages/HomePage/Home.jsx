@@ -7,24 +7,21 @@ import HomeService from "../../services/HomeService";
 const Home = () => {
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState(1)
+  const [items, setItems] = useState([])
 
   useEffect(() => {
     HomeService.getAllProducts(category).then(data => setProducts(data))
   }, [category])
 
-  console.log(category)
-
+  console.log(items)
   return (
     <div>
-
       <div className={styles.navigate}>
-
         <button className={styles.nav_button} onClick={() => setCategory(1)}>Фитиль</button>
         <button className={styles.nav_button} onClick={() => setCategory(2)}>Спрей</button>
         <button className={styles.nav_button} onClick={() => setCategory(3)}>Диффузор</button>
         <button className={styles.nav_button} onClick={() => setCategory(4)}>Саше</button>
       </div>
-
       <h1 className={styles.title}>{
         category === 1 ? 'Фитиля' :
           category === 2 ? 'Спреи' :
@@ -34,13 +31,10 @@ const Home = () => {
       <div className="grid">
         {
           products.map(product => (
-            <Card product={product}/>
+            <Card product={product} setItems={setItems}/>
           ))
         }
-
       </div>
-
-
     </div>
   );
 };
