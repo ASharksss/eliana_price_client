@@ -26,12 +26,23 @@ body {
     align-items: center;
 }
 
+.flex_usually {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
 button {
     cursor: pointer;
 }
 
 .noLink {
     text-decoration: none;
+}
+
+.category_block{
+    margin-top: 60px;
 }
 
 @media screen and (max-width: 1024px) {
