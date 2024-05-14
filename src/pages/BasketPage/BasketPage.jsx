@@ -6,7 +6,9 @@ import Checkbox from "../../ui/Checkbox";
 import PreOrder from "../../components/PreOrder/PreOrder";
 import HomeService from "../../services/HomeService";
 
-const BasketPage = () => {
+const BasketPage = ({generalCount, generalVolume, generalWeight,
+                      generalPrice, setGeneralCount, setGeneralVolume,
+                      setGeneralWeight, setGeneralPrice}) => {
   const [items, setItems] = useState([])
   const [checked, setChecked] = useState({
     wicks: false, sprays: false, diffusers: false, bags: false
@@ -14,13 +16,9 @@ const BasketPage = () => {
   const [types, setTypes] = useState({
     wicks: [], sprays: [], diffusers: [], bags: []
   })
- /* const [generalCount, setGeneralCount] = useState({
-    wicks: 0, sprays: 0, diffusers: 0, bags: 0
-  })*/
-  const [generalCount, setGeneralCount] = useState(0)
-  const [generalVolume, setGeneralVolume] = useState(0)
-  const [generalWeight, setGeneralWeight] = useState(0)
-  const [generalPrice, setGeneralPrice] = useState(0)
+  /* const [generalCount, setGeneralCount] = useState({
+     wicks: 0, sprays: 0, diffusers: 0, bags: 0
+   })*/
 
   let typeUserId = 1
 
@@ -91,7 +89,8 @@ const BasketPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <PreOrder generalCount={generalCount} generalVolume={generalVolume} generalWeight={generalWeight} generalPrice={generalPrice}/>
+      <PreOrder generalCount={generalCount} generalVolume={generalVolume} generalWeight={generalWeight}
+                generalPrice={generalPrice}/>
       <div className={styles.block}>
         <h1>Введите данные о количестве</h1>
 

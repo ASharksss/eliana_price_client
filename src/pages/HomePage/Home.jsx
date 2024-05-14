@@ -8,12 +8,14 @@ const Home = () => {
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState(1)
   const [items, setItems] = useState([])
+  const [basket, setBasket] = useState([])
 
   useEffect(() => {
     HomeService.getAllProducts(category).then(data => setProducts(data))
+    HomeService.getBasket().then(data => setBasket(data))
   }, [category])
 
-  console.log(items)
+
   return (
     <div>
       <div className={styles.navigate}>
@@ -31,7 +33,7 @@ const Home = () => {
       <div className="grid">
         {
           products.map(product => (
-            <Card product={product} setItems={setItems}/>
+            <Card product={product} setItems={setItems} basket={basket}/>
           ))
         }
       </div>
