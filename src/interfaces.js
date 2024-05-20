@@ -3,3 +3,9 @@ export const IBasketItems = (productVendorCode, count) => {
     productVendorCode, count
   }
 }
+
+export const IBasketItemPrice = (productVendorCode, price) => {
+  return {
+    productVendorCode, price
+  }
+}

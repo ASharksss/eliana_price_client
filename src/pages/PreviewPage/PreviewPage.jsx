@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
+import styles from './preview.module.css'
 import {Table} from "antd";
 import HomeService from "../../services/HomeService";
+import {NavLink} from "react-router-dom";
+
 
 const PreviewPage = () => {
   const userTypeId = 1
@@ -10,7 +13,16 @@ const PreviewPage = () => {
     HomeService.getBasket().then(data => setData(data))
   }, [])
 
-  console.log(data)
+  let priceForOne = userTypeId === 1 ?
+    {
+      title: 'цена за шт',
+      dataIndex: ['product', 'price_opt'],
+      key: 'price',
+    } : {
+      title: 'цена за шт',
+      dataIndex: ['product', 'price_roz'],
+      key: 'price'
+    }
 
   const columns = [
     {
@@ -23,11 +35,7 @@ const PreviewPage = () => {
       dataIndex: ['product', 'barcode'],
       key: 'barcode',
     },
-    {
-      title: 'цена за шт',
-      dataIndex: ['product', 'price_roz'],
-      key: 'price',
-    },
+    priceForOne,
     {
       title: 'Аромат',
       dataIndex: ['product', 'name'],
@@ -40,14 +48,28 @@ const PreviewPage = () => {
     },
     {
       title: 'Сумма',
-      dataIndex: 'sum',
-      key: 'sum',
+      dataIndex: 'price',
+      key: 'price',
     }
   ]
-
+  const takeOrder = () => {
+    HomeService.takeOrder(data).then(data => {
+      console.log('все')
+    })
+  }
   return (
     <div>
-      <Table columns={columns} dataSource={data}/>
+      <h1 className={styles.title}>Предпросмотр</h1>
+      <h2 className={styles.subtitle}>Проверьте корректность Вашего заказа</h2>
+      <Table columns={columns} dataSource={data} scroll={{
+        x: 1400,
+      }}/>
+      <div className="flex">
+        <NavLink to='/basket'>
+          <button className={styles.button}>Назад</button>
+        </NavLink>
+        <button className={styles.button} onClick={takeOrder}>Оформить</button>
+      </div>
     </div>
   );
 };

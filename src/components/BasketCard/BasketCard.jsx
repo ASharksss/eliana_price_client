@@ -2,7 +2,15 @@ import React, {useState, useEffect} from 'react';
 import styles from './basket_card.module.css'
 import HomeService from "../../services/HomeService";
 
-const BasketCard = ({item, checked, typeUserId, setGeneralCount, setGeneralWeight, setGeneralVolume, setGeneralPrice}) => {
+const BasketCard = ({
+                      item,
+                      checked,
+                      typeUserId,
+                      setGeneralCount,
+                      setGeneralWeight,
+                      setGeneralVolume,
+                      setGeneralPrice
+                    }) => {
   const [count, setCount] = useState(item.count)
   const [boxes, setBoxes] = useState(Math.ceil(item.count / item.product.count_in_box))
   const [volume, setVolume] = useState(Math.ceil(item.count / item.product.count_in_box) * item.product.volume_in_box)
@@ -34,7 +42,7 @@ const BasketCard = ({item, checked, typeUserId, setGeneralCount, setGeneralWeigh
       let enterValueBoxes = e.target.value !== '' ? Math.ceil(enterValue / item.product.count_in_box) : 0
       let enterValueVolume = e.target.value !== '' ? Math.ceil(enterValue / item.product.count_in_box) * item.product.volume_in_box : 0
       let enterValueWeight = e.target.value !== '' ? Math.ceil(enterValue / item.product.count_in_box) * item.product.weight_in_box : 0
-      let enterValuePrice = e.target.value !== '' ?  typeUserId === 1 ? item.product.price_opt * enterValue : item.product.price_roz * enterValue : 0
+      let enterValuePrice = e.target.value !== '' ? typeUserId === 1 ? item.product.price_opt * enterValue : item.product.price_roz * enterValue : 0
       setBoxes(enterValueBoxes)
       setVolume(enterValueVolume)
       setWeight(enterValueWeight)
@@ -72,6 +80,10 @@ const BasketCard = ({item, checked, typeUserId, setGeneralCount, setGeneralWeigh
       }
     }
   }
+
+  useEffect(() => {
+    HomeService.updatePrice(item.product.vendor_code, price).then(data => console.log(data))
+  }, [price])
 
   return (
     <div className={styles.card}>

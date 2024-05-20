@@ -1,5 +1,5 @@
 import axios from "axios";
-import {IBasketItems} from '../interfaces'
+import {IBasketItemPrice, IBasketItems} from '../interfaces'
 
 class HomeService {
   async getAllProducts(category) {
@@ -23,6 +23,17 @@ class HomeService {
   async updateCount(vendor_code, count) {
     const item = IBasketItems(vendor_code, count)
     const {data} = await axios.put(`http://192.168.1.121:5000/api/product/updateCountBasket`, item)
+    return data
+  }
+
+  async updatePrice(vendor_code, price) {
+    const item = IBasketItemPrice(vendor_code, price)
+    const {data} = await axios.put(`http://192.168.1.121:5000/api/product/updatePriceBasketItem`, item)
+    return data
+  }
+
+  async takeOrder(order) {
+    const {data} = await axios.post(`http://192.168.1.121:5000/api/product/sendExcel`, order)
     return data
   }
 
