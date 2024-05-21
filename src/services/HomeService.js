@@ -33,7 +33,7 @@ class HomeService {
   }
 
   async takeOrder(order) {
-    const {data} = await axios.post(`http://192.168.1.121:5000/api/product/sendExcel`, order)
+    const {data} = await axios.post(`http://192.168.1.121:5000/api/product/sendExcel`, {order})
     return data
   }
 
