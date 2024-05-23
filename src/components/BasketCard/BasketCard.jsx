@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {GoTrash} from "react-icons/go";
 import styles from './basket_card.module.css'
 import HomeService from "../../services/HomeService";
 
@@ -125,9 +126,16 @@ const BasketCard = ({
         </div>
 
         <div className={`${styles.bot_block}`}>
-          <span className={styles.title}>Общая стоимость: </span><p className={styles.value}>
-          {Intl.NumberFormat('ru-RU', {maximumSignificantDigits: 10, style: 'currency', currency: 'RUB'}).format(price)}
-        </p>
+          <span className={styles.title}>Общая стоимость: </span>
+          <p className={styles.value}>
+            {Intl.NumberFormat('ru-RU', {
+              maximumSignificantDigits: 10,
+              style: 'currency',
+              currency: 'RUB'
+            }).format(price)}
+          </p>
+          <GoTrash className={styles.trash}
+                   onClick={() => HomeService.deleteInBasket(item.product.vendor_code).then(data => console.log('Удалено'))}/>
         </div>
       </div>
 

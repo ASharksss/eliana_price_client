@@ -112,7 +112,7 @@ const BasketPage = ({generalCount, generalVolume, generalWeight,
 
         {types.sprays.length > 0 ?
           <div className='category_block'>
-            <div className="flex_usually"><h1>Спреи</h1><Checkbox type={'sprays'} checked={checked.sprays}
+            <div className="flex_usually"><h1>Диффузоры</h1><Checkbox type={'sprays'} checked={checked.sprays}
                                                                   setChecked={setChecked}/>
             </div>
             {
@@ -127,7 +127,7 @@ const BasketPage = ({generalCount, generalVolume, generalWeight,
 
         {types.diffusers.length > 0 ?
           <div className='category_block'>
-            <div className="flex_usually"><h1>Диффузоры</h1><Checkbox type={'diffusers'} checked={checked.diffusers}
+            <div className="flex_usually"><h1>Спреи</h1><Checkbox type={'diffusers'} checked={checked.diffusers}
                                                                       setChecked={setChecked}/></div>
             {
               types.diffusers?.map(diffuser => (

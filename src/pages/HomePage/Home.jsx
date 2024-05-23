@@ -20,14 +20,14 @@ const Home = () => {
     <div>
       <div className={styles.navigate}>
         <button className={styles.nav_button} onClick={() => setCategory(1)}>Фитиль</button>
-        <button className={styles.nav_button} onClick={() => setCategory(2)}>Спрей</button>
-        <button className={styles.nav_button} onClick={() => setCategory(3)}>Диффузор</button>
+        <button className={styles.nav_button} onClick={() => setCategory(2)}>Диффузор</button>
+        <button className={styles.nav_button} onClick={() => setCategory(3)}>Спрей</button>
         <button className={styles.nav_button} onClick={() => setCategory(4)}>Саше</button>
       </div>
       <h1 className={styles.title}>{
         category === 1 ? 'Фитиля' :
-          category === 2 ? 'Спреи' :
-            category === 3 ? 'Диффузоры' :
+          category === 2 ? 'Диффузоры' :
+            category === 3 ? 'Спреи' :
               category === 4 ? 'Саше' : ''
       }</h1>
       <div className="grid">

@@ -20,6 +20,12 @@ class HomeService {
     return data
   }
 
+  async deleteInBasket(productVendorCode) {
+    const {data} = await axios.delete(`http://192.168.1.121:5000/api/product/deleteInBasket`, productVendorCode)
+    return data
+  }
+
+
   async updateCount(vendor_code, count) {
     const item = IBasketItems(vendor_code, count)
     const {data} = await axios.put(`http://192.168.1.121:5000/api/product/updateCountBasket`, item)

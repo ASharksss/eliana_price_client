@@ -17,6 +17,7 @@ const Card = ({product, items, setItems, basket}) => {
     HomeService.addInBasket(product.vendor_code, 0).then(data => setAdded(true))
   }
 
+
   useEffect(() => {
     iterating()
   }, [basket])
