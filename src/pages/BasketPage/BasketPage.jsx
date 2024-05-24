@@ -6,9 +6,11 @@ import Checkbox from "../../ui/Checkbox";
 import PreOrder from "../../components/PreOrder/PreOrder";
 import HomeService from "../../services/HomeService";
 
-const BasketPage = ({generalCount, generalVolume, generalWeight,
+const BasketPage = ({
+                      generalCount, generalVolume, generalWeight,
                       generalPrice, setGeneralCount, setGeneralVolume,
-                      setGeneralWeight, setGeneralPrice}) => {
+                      setGeneralWeight, setGeneralPrice
+                    }) => {
   const [items, setItems] = useState([])
   const [checked, setChecked] = useState({
     wicks: false, sprays: false, diffusers: false, bags: false
@@ -87,6 +89,18 @@ const BasketPage = ({generalCount, generalVolume, generalWeight,
     iterating()
   }, [items])
 
+  const handleDeleteItem = async (productVendorCode) => {
+    await HomeService.deleteInBasket(productVendorCode).then(async () => await HomeService.getBasket().then(data => setItems(data)))
+  }
+
+  if (items.length === 0) {
+    return (
+      <div>
+        <p>Корзина пустая</p>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.wrapper}>
       <PreOrder generalCount={generalCount} generalVolume={generalVolume} generalWeight={generalWeight}
@@ -105,7 +119,7 @@ const BasketPage = ({generalCount, generalVolume, generalWeight,
                 <BasketCard item={wick} checked={checked.wicks} typeUserId={typeUserId}
                             setGeneralCount={setGeneralCount} generalCount={generalCount}
                             setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}
-                            setGeneralPrice={setGeneralPrice}/>
+                            setGeneralPrice={setGeneralPrice} handleDeleteItem={handleDeleteItem}/>
               ))
             }
           </div> : null}
@@ -113,13 +127,14 @@ const BasketPage = ({generalCount, generalVolume, generalWeight,
         {types.sprays.length > 0 ?
           <div className='category_block'>
             <div className="flex_usually"><h1>Диффузоры</h1><Checkbox type={'sprays'} checked={checked.sprays}
-                                                                  setChecked={setChecked}/>
+                                                                      setChecked={setChecked}/>
             </div>
             {
               types.sprays?.map(spray => (
                 <BasketCard item={spray} checked={checked.sprays} typeUserId={typeUserId}
                             setGeneralCount={setGeneralCount} setGeneralPrice={setGeneralPrice}
-                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}/>
+                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}
+                            handleDeleteItem={handleDeleteItem}/>
               ))
             }
           </div> : null
@@ -128,12 +143,13 @@ const BasketPage = ({generalCount, generalVolume, generalWeight,
         {types.diffusers.length > 0 ?
           <div className='category_block'>
             <div className="flex_usually"><h1>Спреи</h1><Checkbox type={'diffusers'} checked={checked.diffusers}
-                                                                      setChecked={setChecked}/></div>
+                                                                  setChecked={setChecked}/></div>
             {
               types.diffusers?.map(diffuser => (
                 <BasketCard item={diffuser} checked={checked.diffusers} typeUserId={typeUserId}
                             setGeneralCount={setGeneralCount} setGeneralPrice={setGeneralPrice}
-                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}/>
+                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}
+                            handleDeleteItem={handleDeleteItem}/>
               ))
             }
           </div> : null
@@ -148,7 +164,7 @@ const BasketPage = ({generalCount, generalVolume, generalWeight,
               types.bags?.map(bag => (
                 <BasketCard item={bag} checked={checked.bags} typeUserId={typeUserId}
                             setGeneralCount={setGeneralCount} setGeneralPrice={setGeneralPrice}
-                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}/>
+                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight} handleDeleteItem={handleDeleteItem}/>
               ))
             }
           </div> : null

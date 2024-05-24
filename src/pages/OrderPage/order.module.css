@@ -1,0 +1,46 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.input_block {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.input_block + .input_block {
+    margin-top: 30px;
+}
+
+.input {
+    border: 1px solid rgba(45, 48, 58, 0.87);
+    border-radius: 10px;
+    padding: 10px;
+    background-color: transparent;
+    height: 40px;
+}
+
+.submit {
+    margin-top: 40px;
+    width: 250px;
+    height: 40px;
+    color:  #ad3939;
+    background-color: transparent;
+    border: 2px solid #ad3939;
+    border-radius: 10px;
+    transition: .25s;
+    font-weight: bold;
+}
+
+.submit:hover {
+    background-color: #a02f12;
+    color: white;
+}

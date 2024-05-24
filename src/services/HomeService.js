@@ -1,5 +1,5 @@
 import axios from "axios";
-import {IBasketItemPrice, IBasketItems} from '../interfaces'
+import {IBasketItemPrice, IBasketItems, IOrder} from '../interfaces'
 
 class HomeService {
   async getAllProducts(category) {
@@ -21,7 +21,7 @@ class HomeService {
   }
 
   async deleteInBasket(productVendorCode) {
-    const {data} = await axios.delete(`http://192.168.1.121:5000/api/product/deleteInBasket`, productVendorCode)
+    const {data} = await axios.delete(`http://192.168.1.121:5000/api/product/deleteInBasket`, {data: {productVendorCode}})
     return data
   }
 
@@ -38,9 +38,15 @@ class HomeService {
     return data
   }
 
-  async takeOrder(order) {
-    const {data} = await axios.post(`http://192.168.1.121:5000/api/product/sendExcel`, {order})
+  async takeOrder(order, formOrg, nameOrg) {
+    const item = IOrder(order, formOrg, nameOrg)
+    console.log(item)
+    const {data} = await axios.post(`http://192.168.1.121:5000/api/product/sendExcel`, {order: item})
     return data
+    /*const item = IOrder(order, formOrg, nameOrg)
+    console.log(item)
+    const {data} = await axios.post(`http://192.168.1.121:5000/api/product/sendExcel`, {order})
+    return data*/
   }
 
 }

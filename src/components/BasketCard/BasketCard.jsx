@@ -4,13 +4,8 @@ import styles from './basket_card.module.css'
 import HomeService from "../../services/HomeService";
 
 const BasketCard = ({
-                      item,
-                      checked,
-                      typeUserId,
-                      setGeneralCount,
-                      setGeneralWeight,
-                      setGeneralVolume,
-                      setGeneralPrice
+                      item, checked, typeUserId, setGeneralCount,
+                      setGeneralWeight, setGeneralVolume, setGeneralPrice, handleDeleteItem
                     }) => {
   const [count, setCount] = useState(item.count)
   const [boxes, setBoxes] = useState(Math.ceil(item.count / item.product.count_in_box))
@@ -134,8 +129,7 @@ const BasketCard = ({
               currency: 'RUB'
             }).format(price)}
           </p>
-          <GoTrash className={styles.trash}
-                   onClick={() => HomeService.deleteInBasket(item.product.vendor_code).then(data => console.log('Удалено'))}/>
+          <GoTrash className={styles.trash} onClick={() => handleDeleteItem(item.product.vendor_code)}/>
         </div>
       </div>
 

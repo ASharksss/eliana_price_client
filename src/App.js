@@ -6,6 +6,7 @@ import BasketPage from "./pages/BasketPage/BasketPage";
 import Layout from "./Layout";
 import {useState} from "react";
 import PreviewPage from "./pages/PreviewPage/PreviewPage";
+import OrderPage from "./pages/OrderPage/OrderPage";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
                                                          setGeneralCount={setGeneralCount}
                                                          setGeneralWeight={setGeneralWeight}/>}/>
             <Route path={'/preview'} element={<PreviewPage/>}/>
+            <Route path={'/order'} element={<OrderPage/>}/>
           </Route>
 
         </Routes>
