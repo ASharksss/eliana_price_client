@@ -7,6 +7,9 @@ import Layout from "./Layout";
 import {useState} from "react";
 import PreviewPage from "./pages/PreviewPage/PreviewPage";
 import OrderPage from "./pages/OrderPage/OrderPage";
+import CorrectOrder from "./pages/ResultOrder/CorrectOrder";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import OrderList from "./pages/OrderList";
 
 function App() {
 
@@ -27,8 +30,11 @@ function App() {
                                                          setGeneralVolume={setGeneralVolume}
                                                          setGeneralCount={setGeneralCount}
                                                          setGeneralWeight={setGeneralWeight}/>}/>
+            <Route path={'/profile'} element={<ProfilePage/>}/>
+            <Route path={'/orderList/:id'} element={<OrderList/>}/>
             <Route path={'/preview'} element={<PreviewPage/>}/>
             <Route path={'/order'} element={<OrderPage/>}/>
+            <Route path={'/correctOrder'} element={<CorrectOrder/>}/>
           </Route>
 
         </Routes>

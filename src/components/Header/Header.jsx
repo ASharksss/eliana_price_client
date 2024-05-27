@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './header.module.css'
 import basket from '../../assets/basket.png'
+import profile from '../../assets/profile.png'
 import {NavLink} from "react-router-dom";
 
 
@@ -12,9 +13,15 @@ const Header = () => {
 
         <span className={styles.logo_name}> Eliana</span>
       </NavLink>
-      <NavLink to={'/basket'}>
-        <img className={styles.basket} src={basket} alt=""/>
-      </NavLink>
+      <div>
+        <NavLink to={'/profile'} className={styles.link}>
+          <img className={styles.basket} src={profile} alt=""/>
+        </NavLink>
+        <NavLink to={'/basket'}>
+          <img className={styles.basket} src={basket} alt=""/>
+        </NavLink>
+      </div>
+
     </div>
   );
 };

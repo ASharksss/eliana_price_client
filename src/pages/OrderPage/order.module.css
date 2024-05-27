@@ -5,6 +5,11 @@
     margin-top: 30px;
 }
 
+.title {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
 .input_block {
     display: flex;
     flex-direction: column;

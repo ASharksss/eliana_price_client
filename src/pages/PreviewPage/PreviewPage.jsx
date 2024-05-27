@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from './preview.module.css'
 import {Table} from "antd";
 import HomeService from "../../services/HomeService";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {redirect} from "react-router-dom";
 
 
@@ -10,6 +10,8 @@ const PreviewPage = () => {
   const userTypeId = 1
 
   const navigate = useNavigate()
+  const location = useLocation();
+  const generalCount = location.state;
 
   const [data, setData] = useState([])
 
@@ -56,7 +58,7 @@ const PreviewPage = () => {
     if (check.length > 0) {
       alert('Вы не можете заказать товары, количество которых равно 0')
     } else {
-      navigate('/order', {state: data})
+      navigate('/order', {state: {data, generalCount}})
       /* HomeService.takeOrder(data).then(data => {
         console.log('все')
       })*/

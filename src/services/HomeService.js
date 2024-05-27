@@ -14,6 +14,18 @@ class HomeService {
     return data
   }
 
+  async getOrders() {
+    const {data} =
+      await axios.get(`http://192.168.1.121:5000/api/product/getOrders`)
+    return data
+  }
+
+  async getOrderList(id) {
+    const {data} =
+      await axios.get(`http://192.168.1.121:5000/api/product/getOrderList/${id}`)
+    return data
+  }
+
   async addInBasket(productVendorCode, count) {
     const item = IBasketItems(productVendorCode, count)
     const {data} = await axios.post(`http://192.168.1.121:5000/api/product/addInBasket`, item)
@@ -38,8 +50,8 @@ class HomeService {
     return data
   }
 
-  async takeOrder(order, formOrg, nameOrg) {
-    const item = IOrder(order, formOrg, nameOrg)
+  async takeOrder(order, formOrg, nameOrg, generalCount) {
+    const item = IOrder(order, formOrg, nameOrg, generalCount)
     console.log(item)
     const {data} = await axios.post(`http://192.168.1.121:5000/api/product/sendExcel`, {order: item})
     return data

@@ -1,0 +1,43 @@
+.info_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.input {
+    margin-top: 10px;
+    width: 320px;
+    height: 30px;
+    font-size: 16px;
+    background-color: transparent;
+    border: 2px solid black;
+    padding: 7px;
+    border-radius: 20px;
+}
+
+.order_history {
+    margin-top: 30px;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.link {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.link + .link {
+    margin-top: 10px;
+}
+

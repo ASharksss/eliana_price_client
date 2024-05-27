@@ -1,0 +1,39 @@
+import React, {useEffect, useState} from 'react';
+import {Table} from "antd";
+import avatar from '../../assets/ava.jpg'
+import styles from './profile.module.css'
+import HomeService from "../../services/HomeService";
+import OrderItem from "../../components/OrderItem/OrderItem";
+import {NavLink} from "react-router-dom";
+
+const ProfilePage = () => {
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    HomeService.getOrders().then(data => setOrders(data))
+  }, [])
+
+  console.log(orders)
+  return (
+    <div>
+      <div className={styles.info_block}>
+        <img src={avatar} alt="" className={styles.avatar}/>
+        <input type="text" className={styles.input} disabled/>
+        <input type="text" className={styles.input} disabled/>
+      </div>
+      <div className={styles.order_history}>
+        <h1 className={styles.title}> История заказов</h1>
+        {
+          orders.map(item => (
+            <NavLink to={`/orderList/${item.id}`} className={styles.link}>
+              <OrderItem count={item.count} count_box={item.count_box} createdAt={item.createdAt} sum={item.sum}/>
+            </NavLink>
+
+          ))
+        }
+      </div>
+    </div>
+  );
+};
+
+export default ProfilePage;
