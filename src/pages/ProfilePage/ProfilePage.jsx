@@ -8,18 +8,21 @@ import {NavLink} from "react-router-dom";
 
 const ProfilePage = () => {
   const [orders, setOrders] = useState([])
+  const [user, setUser] = useState([])
 
   useEffect(() => {
     HomeService.getOrders().then(data => setOrders(data))
+    HomeService.getUser().then(data => setUser(data))
+
   }, [])
 
-  console.log(orders)
+  console.log(user)
   return (
     <div>
       <div className={styles.info_block}>
         <img src={avatar} alt="" className={styles.avatar}/>
-        <input type="text" className={styles.input} disabled/>
-        <input type="text" className={styles.input} disabled/>
+        <input type="text" className={styles.input} disabled value={user.short_name}/>
+        <input type="text" className={styles.input} disabled value={user.email}/>
       </div>
       <div className={styles.order_history}>
         <h1 className={styles.title}> История заказов</h1>

@@ -15,3 +15,5 @@ export const IOrder = (order, formOrg, nameOrg, generalCount) => {
     order, formOrg,nameOrg, generalCount
   }
 }
+
+export const IUserLogin = (email, password) => ({email, password})

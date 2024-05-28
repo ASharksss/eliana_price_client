@@ -9,7 +9,9 @@ import PreviewPage from "./pages/PreviewPage/PreviewPage";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import CorrectOrder from "./pages/ResultOrder/CorrectOrder";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import OrderList from "./pages/OrderList";
+import OrderList from "./pages/OrderList/OrderList";
+import Registration from "./pages/Authtentication/Registration";
+import Login from "./pages/Authtentication/Login";
 
 function App() {
 
@@ -35,8 +37,10 @@ function App() {
             <Route path={'/preview'} element={<PreviewPage/>}/>
             <Route path={'/order'} element={<OrderPage/>}/>
             <Route path={'/correctOrder'} element={<CorrectOrder/>}/>
-          </Route>
 
+          </Route>
+          <Route path={'/registration'} element={<Registration/>}/>
+          <Route path={'/login'} element={<Login/>}/>
         </Routes>
       </BrowserRouter>
 
