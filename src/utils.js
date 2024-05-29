@@ -1,4 +1,3 @@
-export const backendUrl = 'http://192.168.1.121:5000/api'
 export function pluralRusVariant(x) {
   let lastTwoDigits = x % 100;
   let tens = Math.floor(lastTwoDigits / 10);

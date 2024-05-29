@@ -20,12 +20,18 @@ axiosWithAuth.interceptors.request.use(config => {
   return config
 })
 
-function errorCatch(error) {
-  return error.toString()
+const errorCatch = (error) => {
+  const message = error?.response?.data?.message
+  return message
+    ? typeof error.response.data.message === 'object'
+      ? message[0]
+      : message
+    : error.message
 }
 
 axiosWithAuth.interceptors.response.use(config => config, async error => {
   const originalRequest = error.config;
+  console.log(errorCatch(error))
   if((error?.response?.status === 401 || errorCatch(error) === 'jwt expired' || errorCatch(error) === 'jwt must be provided') && error.config && !error.config._isRetry){
     originalRequest._isRetry = true
     try {
