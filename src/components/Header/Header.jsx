@@ -9,7 +9,6 @@ import {useAuth} from "../../context/AuthProvider";
 
 const Header = () => {
   const {user} = useAuth();
-  console.log(user)
   return (
     <div className={styles.header}>
       <NavLink to={'/'} className='noLink'>
@@ -17,7 +16,7 @@ const Header = () => {
         <span className={styles.logo_name}> Eliana</span>
       </NavLink>
       <div>
-        {user?.typeUserId === 1 ?
+        {user?.typeUserId === 3 ?
           <NavLink to={'/create/user'} className={styles.link}>
             <img className={styles.basket} src={plus} alt=""/>
           </NavLink>

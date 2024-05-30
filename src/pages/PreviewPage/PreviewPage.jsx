@@ -6,7 +6,7 @@ import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {redirect} from "react-router-dom";
 
 
-const PreviewPage = () => {
+const PreviewPage = ({generalPrice}) => {
   const userTypeId = 1
 
   const navigate = useNavigate()
@@ -68,6 +68,7 @@ const PreviewPage = () => {
     <div>
       <h1 className={styles.title}>Предпросмотр</h1>
       <h2 className={styles.subtitle}>Проверьте корректность Вашего заказа</h2>
+      <p className={styles.general_count}>Сумма заказа: {generalPrice} рублей</p>
       <Table columns={columns} dataSource={data} scroll={{
         x: 400,
       }}/>

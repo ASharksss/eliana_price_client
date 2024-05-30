@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate()
   const auth = useAuth();
 
-  const [email, setEmail] = useState('kurbanalieva.alsu@yandex.ru')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = async (e) => {

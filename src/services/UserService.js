@@ -24,10 +24,11 @@ class UserService {
   }
 
   async getNewTokens() {
-    const response = await axiosClassic("/user/login/access-token", {
-      method: "post",
-      withCredentials: true
-    })
+    const response = await axiosClassic.post('/user/login/access-token')
+    // const response = await axiosClassic("/user/login/access-token", {
+    //   method: "post",
+    //   withCredentials: true
+    // })
     if (response.data.token) {
       axiosWithAuth.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
       saveTokenStorage(response.data.token)

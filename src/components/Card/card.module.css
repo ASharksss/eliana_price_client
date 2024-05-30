@@ -10,14 +10,13 @@
 }
 
 .name {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 
 }
 
 .price {
     font-size: 16px;
-    font-weight: bold;
 }
 
 .button {
@@ -26,6 +25,15 @@
     border-radius: 10px;
     border: 1px solid #ad3939;
     color: #a02f12;
+    font-weight: bold;
+}
+
+.button_added {
+    height: 30px;
+    background-color: #eeefef;
+    border-radius: 10px;
+    border: none;
+    color: #c0c1c1;
     font-weight: bold;
 }
 

@@ -16,7 +16,6 @@ const CorrectOrder = () => {
         </video>
         <div className='flex'>
           <button className={styles.button} onClick={() => navigate('/')}>На главную</button>
-          <button className={styles.button}>Посмотреть заказ</button>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ function App() {
   const [generalPrice, setGeneralPrice] = useState(0)
 
   return (
-    <div className="App">
+    <div className="App montserrat">
       <BrowserRouter>
         <AuthProvider>
           <Routes>
@@ -35,7 +35,7 @@ function App() {
                                                            setGeneralWeight={setGeneralWeight}/>}/>
               <Route path={'/profile'} element={<ProfilePage/>}/>
               <Route path={'/orderList/:id'} element={<OrderList/>}/>
-              <Route path={'/preview'} element={<PreviewPage/>}/>
+              <Route path={'/preview'} element={<PreviewPage generalPrice={generalPrice}/>}/>
               <Route path={'/order'} element={<OrderPage/>}/>
               <Route path={'/correctOrder'} element={<CorrectOrder/>}/>
 

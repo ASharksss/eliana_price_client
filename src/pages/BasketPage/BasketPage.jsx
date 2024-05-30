@@ -5,6 +5,7 @@ import BasketCard from "../../components/BasketCard/BasketCard";
 import Checkbox from "../../ui/Checkbox";
 import PreOrder from "../../components/PreOrder/PreOrder";
 import HomeService from "../../services/HomeService";
+import {useAuth} from "../../context/AuthProvider";
 
 const BasketPage = ({
                       generalCount, generalVolume, generalWeight,
@@ -22,7 +23,8 @@ const BasketPage = ({
      wicks: 0, sprays: 0, diffusers: 0, bags: 0
    })*/
 
-  let typeUserId = 1
+  const {user} = useAuth();
+  let typeUserId = user?.typeUserId
 
   const iterating = () => {
     const wicksArray = []
@@ -126,8 +128,8 @@ const BasketPage = ({
 
         {types.sprays.length > 0 ?
           <div className='category_block'>
-            <div className="flex_usually"><h1>Диффузоры</h1><Checkbox type={'sprays'} checked={checked.sprays}
-                                                                      setChecked={setChecked}/>
+            <div className="flex_usually"><h1>Диффузоры</h1>
+              <Checkbox type={'sprays'} checked={checked.sprays} setChecked={setChecked}/>
             </div>
             {
               types.sprays?.map(spray => (

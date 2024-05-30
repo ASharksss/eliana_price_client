@@ -85,7 +85,7 @@ const BasketCard = ({
     <div className={styles.card}>
       <div className='flex'>
         <div className='flex'>
-          <span className={styles.title}>Аромат: </span><p className={styles.value}><b>{item.product.name}</b>
+          <p className={styles.value}><b>{item.product.name}</b>
         </p>
         </div>
 

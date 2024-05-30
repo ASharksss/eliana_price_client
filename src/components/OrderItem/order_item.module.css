@@ -17,3 +17,11 @@
 .block + .block {
     margin-top: 10px;
 }
+
+
+@media screen and (max-width: 400px) {
+    .block {
+        font-size: 14px;
+        width: 93%;
+    }
+}

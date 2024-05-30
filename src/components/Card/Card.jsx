@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styles from './card.module.css'
 import HomeService from "../../services/HomeService";
+import {useAuth} from "../../context/AuthProvider";
 
 const Card = ({product, items, setItems, basket}) => {
+  const {user} = useAuth();
   const [added, setAdded] = useState(false)
 
   const iterating = () => {
@@ -25,8 +27,12 @@ const Card = ({product, items, setItems, basket}) => {
   return (
     <div className={styles.card}>
       <p className={styles.name}>{product.name}</p>
-      <span className={styles.price}>{product.price_opt}</span>
-      <button className={styles.button} onClick={addInBasket}>{added ? 'Добавлено' : 'В коризну'}</button>
+      <span className={styles.price}>{user?.typeUserId === 1 ? product.price_opt : product.price_roz} р.</span>
+      {
+        added ?  <button className={styles.button_added} onClick={addInBasket}>{added ? 'Добавлено' : 'В коризну'}</button> :
+          <button className={styles.button} onClick={addInBasket}>{added ? 'Добавлено' : 'В коризну'}</button>
+      }
+
     </div>
   );
 };

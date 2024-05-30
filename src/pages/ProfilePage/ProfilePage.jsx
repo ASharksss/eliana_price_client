@@ -16,7 +16,6 @@ const ProfilePage = () => {
 
   }, [])
 
-  console.log(user)
   return (
     <div>
       <div className={styles.info_block}>
@@ -26,6 +25,9 @@ const ProfilePage = () => {
       </div>
       <div className={styles.order_history}>
         <h1 className={styles.title}> История заказов</h1>
+        {
+          orders.length === 0 ? 'Пока нет заказов' : null
+        }
         {
           orders.map(item => (
             <NavLink to={`/orderList/${item.id}`} className={styles.link}>
