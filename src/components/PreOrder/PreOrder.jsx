@@ -16,7 +16,7 @@ const PreOrder = ({generalCount, generalWeight, generalVolume, generalPrice}) =>
           currency: 'RUB'
         }).format(generalPrice)}</p>
       </div>
-      <NavLink to='/preview' state={generalCount}>
+      <NavLink to='/preview' state={generalCount} className={styles.button_link}>
         <button className={styles.button} >Оформить заказ</button>
       </NavLink>
     </div>
