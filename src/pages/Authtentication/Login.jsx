@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import styles from './auth.module.css'
 import {useAuth} from "../../context/AuthProvider";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+	const navigate = useNavigate();
 	const auth = useAuth();
 
-	const [email, setEmail] = useState('')
+	const [email, setEmail] = useState('tsharksss.dev@gmail.com')
 	const [password, setPassword] = useState('')
 	const [error, setError] = useState('')
 
@@ -13,8 +15,9 @@ const Login = () => {
 		setError('')
 		e.preventDefault();
 		if (email.trim() !== '' && password.trim() !== '') {
-			auth.loginAction(email, password).catch(err => {
-				setError(err)
+			auth.loginAction(email, password).then(res => {
+				if (res.error) return setError(res.error)
+				return navigate(res.path)
 			});
 			return;
 		}

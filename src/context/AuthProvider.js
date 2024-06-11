@@ -31,14 +31,19 @@ const AuthProvider = ({ children }) => {
   }, [])
 
   const loginAction = async (email, password) => {
-    const response = await userService.login(email, password).then(res => res.response)
-    if (response.status >= 200 && response.status <= 299) {
-      setUser(response.data.profile);
-      setToken(response.data.token);
-      setIsAuth(true)
-      return navigate(lastPath ? lastPath : "/");
+    try {
+      const response = await userService.login(email, password).then(res => res)
+      if (response.token) {
+        setUser(response.profile);
+        setToken(response.token);
+        setIsAuth(true)
+        return {path: lastPath ? lastPath : "/"};
+      } else {
+        throw {error: response.response.data.message};
+      }
+    } catch (e) {
+      return e;
     }
-    throw response.data.message;
   };
 
   const logOut = () => {
