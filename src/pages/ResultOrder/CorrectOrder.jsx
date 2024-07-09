@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import gif from '../../assets/1gif.mp4'
 import styles from './resultOrder.module.css'
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../context/AuthProvider";
 
 const CorrectOrder = () => {
+  const {isAuth} = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isAuth) return navigate('/')
+  }, [])
 
   return (
     <div className={styles.center}>

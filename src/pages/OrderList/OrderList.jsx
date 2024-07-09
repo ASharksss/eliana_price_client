@@ -3,8 +3,10 @@ import {useNavigate, useParams} from "react-router-dom";
 import styles from './order_list.module.css'
 import HomeService from "../../services/HomeService";
 import {Table} from "antd";
+import {useAuth} from "../../context/AuthProvider";
 
 const OrderList = () => {
+  const {isAuth} = useAuth()
   const {id} = useParams()
   const navigate = useNavigate()
 
@@ -13,7 +15,11 @@ const OrderList = () => {
   const [user, setUser] = useState()
 
   useEffect(() => {
+    if (isAuth) {
     HomeService.getOrderList(id).then(data => setList(data))
+    } else {
+      return navigate('/')
+    }
   }, [])
 
   console.log(list)

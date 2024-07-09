@@ -46,11 +46,14 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const logOut = () => {
-    setUser(null);
-    setIsAuth(false)
-    setToken("");
-    navigate("/login");
+  const logOut = async () => {
+    const response = await userService.logout()
+    if (response.status === 200) {
+      setUser(null);
+      setIsAuth(false)
+      setToken("");
+      navigate("/login");
+    }
   };
 
   return (

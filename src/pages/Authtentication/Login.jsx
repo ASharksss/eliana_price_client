@@ -7,7 +7,7 @@ const Login = () => {
 	const navigate = useNavigate();
 	const auth = useAuth();
 
-	const [email, setEmail] = useState('tsharksss.dev@gmail.com')
+	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [error, setError] = useState('')
 
@@ -27,9 +27,14 @@ const Login = () => {
 		// })
 	}
 
+	const backButton = () => navigate('/')
+
 	return (
 		<div className={styles.wrapper}>
-			<h1 className={styles.title}>Вход</h1>
+			<div className={styles.wrapperTitle}>
+				<button className={styles.backButton} onClick={backButton}></button>
+				<h1 className={styles.title}>Вход</h1>
+			</div>
 			<form action="" className={styles.form} onSubmit={handleSubmit}>
 				<input type="text" className={styles.input} placeholder={'Введите почту'} value={email}
 				       onChange={(e) => setEmail(e.target.value)}/>

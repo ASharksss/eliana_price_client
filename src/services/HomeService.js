@@ -7,6 +7,11 @@ class HomeService {
       await axiosWithAuth.get(`/product/getAll?categoryId=${category}`)
     return data
   }
+  async getAllProductsAnon(category) {
+    const {data} =
+      await axiosWithAuth.get(`/product/getAllProducts?categoryId=${category}`)
+    return data
+  }
 
   async getBasket() {
     const {data} =

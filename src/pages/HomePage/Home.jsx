@@ -3,16 +3,21 @@ import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import styles from './home.module.css'
 import HomeService from "../../services/HomeService";
+import {useAuth} from "../../context/AuthProvider";
 
 const Home = () => {
+  const {user} = useAuth();
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState(1)
-  const [items, setItems] = useState([])
   const [basket, setBasket] = useState([])
 
   useEffect(() => {
-    HomeService.getAllProducts(category).then(data => setProducts(data))
-    HomeService.getBasket().then(data => setBasket(data))
+    if (user) {
+      HomeService.getAllProducts(category).then(data => setProducts(data))
+      HomeService.getBasket().then(data => setBasket(data))
+    } else {
+      HomeService.getAllProductsAnon(category).then(data => setProducts(data))
+    }
   }, [category])
 
 
@@ -33,7 +38,9 @@ const Home = () => {
       <div className="grid">
         {
           products.map(product => (
-            <Card product={product} setItems={setItems} basket={basket}/>
+            <React.Fragment key={product.vendor_code}>
+              <Card product={product} basket={basket}/>
+            </React.Fragment>
           ))
         }
       </div>

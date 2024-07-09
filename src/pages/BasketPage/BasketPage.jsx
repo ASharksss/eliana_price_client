@@ -6,12 +6,15 @@ import Checkbox from "../../ui/Checkbox";
 import PreOrder from "../../components/PreOrder/PreOrder";
 import HomeService from "../../services/HomeService";
 import {useAuth} from "../../context/AuthProvider";
+import {useNavigate} from "react-router-dom";
 
 const BasketPage = ({
                       generalCount, generalVolume, generalWeight,
                       generalPrice, setGeneralCount, setGeneralVolume,
                       setGeneralWeight, setGeneralPrice
                     }) => {
+  const {isAuth} = useAuth()
+  const navigate = useNavigate()
   const [items, setItems] = useState([])
   const [checked, setChecked] = useState({
     wicks: false, sprays: false, diffusers: false, bags: false
@@ -77,7 +80,11 @@ const BasketPage = ({
 
 
   useEffect(() => {
-    HomeService.getBasket().then(data => setItems(data))
+    if (isAuth) {
+      HomeService.getBasket().then(data => setItems(data))
+    } else {
+      return navigate('/')
+    }
   }, [])
 
   useEffect(() => {
@@ -166,7 +173,8 @@ const BasketPage = ({
               types.bags?.map(bag => (
                 <BasketCard item={bag} checked={checked.bags} typeUserId={typeUserId}
                             setGeneralCount={setGeneralCount} setGeneralPrice={setGeneralPrice}
-                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight} handleDeleteItem={handleDeleteItem}/>
+                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}
+                            handleDeleteItem={handleDeleteItem}/>
               ))
             }
           </div> : null

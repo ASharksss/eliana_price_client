@@ -7,8 +7,24 @@
     justify-content: center;
 }
 
-.title {
+.wrapperTitle {
+    display: flex;
     margin-bottom: 20px;
+    justify-content: space-between;
+    width: 320px;
+}
+.title {
+    flex: 2;
+}
+.backButton {
+    flex: 1;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+}
+.backButton:after {
+    content: "←";
 }
 
 .form {

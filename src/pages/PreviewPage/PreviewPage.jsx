@@ -3,11 +3,12 @@ import styles from './preview.module.css'
 import {Table} from "antd";
 import HomeService from "../../services/HomeService";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import {redirect} from "react-router-dom";
+import {useAuth} from "../../context/AuthProvider";
 
 
 const PreviewPage = ({generalPrice}) => {
-  const userTypeId = 1
+  const {isAuth, user} = useAuth()
+  const userTypeId = user.typeUserId
 
   const navigate = useNavigate()
   const location = useLocation();
@@ -16,7 +17,11 @@ const PreviewPage = ({generalPrice}) => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    HomeService.getBasket().then(data => setData(data))
+    if (isAuth) {
+      HomeService.getBasket().then(data => setData(data))
+    } else {
+      return navigate('/')
+    }
   }, [])
 
   let priceForOne = userTypeId === 1 ?

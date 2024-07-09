@@ -1,19 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {Table} from "antd";
 import avatar from '../../assets/ava.jpg'
 import styles from './profile.module.css'
 import HomeService from "../../services/HomeService";
 import OrderItem from "../../components/OrderItem/OrderItem";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
+import {useAuth} from "../../context/AuthProvider";
 
 const ProfilePage = () => {
+  const {isAuth} = useAuth()
+  const navigate = useNavigate()
   const [orders, setOrders] = useState([])
   const [user, setUser] = useState([])
 
   useEffect(() => {
-    HomeService.getOrders().then(data => setOrders(data))
-    HomeService.getUser().then(data => setUser(data))
-
+    if (isAuth) {
+      HomeService.getOrders().then(data => setOrders(data))
+      HomeService.getUser().then(data => setUser(data))
+    } else {
+      return navigate('/')
+    }
   }, [])
 
   return (

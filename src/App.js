@@ -42,6 +42,7 @@ function App() {
             </Route>
             <Route path={'/create/user'} element={<Registration/>}/>
             <Route path={'/login'} element={<Login/>}/>
+            <Route path={'*'}  element={<Home/>} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

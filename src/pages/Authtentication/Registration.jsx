@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './auth.module.css'
 import userService from "../../services/UserService";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../context/AuthProvider";
 
 const Registration = () => {
+  const {user, isAuth} = useAuth();
   const navigate = useNavigate()
-  const [user, setUser] = useState({
+  const [newUser, setNewUser] = useState({
     inn: null,
     short_name: null,
     email: null,
@@ -15,16 +17,21 @@ const Registration = () => {
     typeUser: 1
   })
 
+  useEffect(() => {
+    console.log(user)
+    if (user?.typeUserId !== 3 || !isAuth) return navigate('/')
+  }, [])
+
   const handleChange = (e) => {
-    setUser({
-      ...user,
+    setNewUser({
+      ...newUser,
       [e.target.name]: e.target.value
     })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await userService.createNewUser(user)
+    await userService.createNewUser(newUser)
       .then(() => {
         alert('Пользователь создан')
         navigate('/')

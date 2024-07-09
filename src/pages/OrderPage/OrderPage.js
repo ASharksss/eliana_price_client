@@ -1,15 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './order.module.css'
 import {useLocation, useNavigate} from "react-router-dom";
 import HomeService from "../../services/HomeService";
+import {useAuth} from "../../context/AuthProvider";
 
 const OrderPage = () => {
+  const {isAuth} = useAuth()
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location)
-  const {data, generalCount} = location.state;
   const [formOrg, setFormOrg] = useState('OOO')
   const [nameOrg, setNameOrg] = useState(null)
+
+  useEffect(() => {
+    if (!isAuth || location.state === null) return navigate('/')
+  }, [])
+
+  if (location.state === null) return navigate('/')
+  const {data, generalCount} = location.state;
 
   const handleSubmit = (e) => {
     e.preventDefault();
