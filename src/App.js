@@ -12,6 +12,7 @@ import OrderList from "./pages/OrderList/OrderList";
 import Registration from "./pages/Authtentication/Registration";
 import Login from "./pages/Authtentication/Login";
 import AuthProvider from "./context/AuthProvider";
+import TransportCompany from "./pages/TransportCompany/TransportCompany";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
               <Route path={'/orderList/:id'} element={<OrderList/>}/>
               <Route path={'/preview'} element={<PreviewPage generalPrice={generalPrice}/>}/>
               <Route path={'/order'} element={<OrderPage/>}/>
+              <Route path={'/transportCompany'} element={<TransportCompany/>}/>
               <Route path={'/correctOrder'} element={<CorrectOrder/>}/>
 
             </Route>

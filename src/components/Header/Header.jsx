@@ -19,7 +19,7 @@ const Header = () => {
       {user ?
         <div>
           <a className={styles.link} onClick={logoutButton}>
-            <img className={styles.basket} src={logout} alt=""/>
+            <img className={styles.log} src={logout} alt=""/>
           </a>
           {user?.typeUserId === 3 ?
             <NavLink to={'/create/user'} className={styles.link}>

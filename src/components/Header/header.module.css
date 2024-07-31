@@ -13,6 +13,12 @@
     cursor: pointer;
 }
 
+.log {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
 .logo_name {
     font-size: 40px;
     font-weight: bold;

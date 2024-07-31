@@ -18,16 +18,21 @@ const OrderPage = () => {
   if (location.state === null) return navigate('/')
   const {data, generalCount} = location.state;
 
+  /* const handleSubmit = (e) => {
+     e.preventDefault();
+     HomeService.takeOrder(data, formOrg, nameOrg, generalCount)
+       .then(() => navigate('/correctOrder'))
+   }*/
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    HomeService.takeOrder(data, formOrg, nameOrg, generalCount)
-      .then(() => navigate('/correctOrder'))
+    e.preventDefault()
+    navigate('/transportCompany', {state: {data, generalCount, formOrg, nameOrg}})
   }
 
   return (
     <form className={styles.wrapper} onSubmit={handleSubmit}>
       <div className={styles.input_block}>
-        <h1 className={styles.title}>Информация о плательщике</h1>
+        <h1 className={styles.title}>Кто плательщик</h1>
         <label htmlFor="">Выберите форму организации</label>
         <select name="" id="" className={styles.input} onChange={(e) => setFormOrg(e.target.value)}>
           <option value="OOO">ООО</option>
@@ -41,9 +46,8 @@ const OrderPage = () => {
                onChange={e => setNameOrg(e.target.value)} required={true}/>
       </div>
 
-      <button className={styles.submit}
-      >Отправить заказ
-      </button>
+
+      <button className={styles.submit}>Отправить заказ</button>
     </form>
   );
 };

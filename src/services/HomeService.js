@@ -7,6 +7,7 @@ class HomeService {
       await axiosWithAuth.get(`/product/getAll?categoryId=${category}`)
     return data
   }
+
   async getAllProductsAnon(category) {
     const {data} =
       await axiosWithAuth.get(`/product/getAllProducts?categoryId=${category}`)
@@ -68,7 +69,6 @@ class HomeService {
 
   async takeOrder(order, formOrg, nameOrg, generalCount) {
     const item = IOrder(order, formOrg, nameOrg, generalCount)
-    console.log(item)
     const {data} = await axiosWithAuth.post(`/product/sendExcel`, {order: item})
     return data
     /*const item = IOrder(order, formOrg, nameOrg)
@@ -82,6 +82,20 @@ class HomeService {
     return data
   }
 
+  async getTransportCompanies() {
+    const {data} = await axiosWithAuth.get(`/transport/getTransportCompanies`)
+    return data
+  }
+
+  async getFieldNames(currentTrCompanyId) {
+    const {data} = await axiosWithAuth.get(`/transport/getFieldNames?id=${currentTrCompanyId}`)
+    return data
+  }
+
+  async createWaybills(formData) {
+    const {data} = await axiosWithAuth.post(`/transport/createWaybills`, {formData: formData})
+    return data
+  }
 }
 
 export default new HomeService()
