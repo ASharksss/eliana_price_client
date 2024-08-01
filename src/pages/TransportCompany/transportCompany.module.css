@@ -2,13 +2,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.title {
+    margin-bottom: 40px;
 }
 
 .input_block {
     display: flex;
     flex-direction: column;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .label {
@@ -16,7 +21,39 @@
     font-weight: bold;
 }
 
-.input {;
-    width: 600px;
+.input {
+    border: 1px solid rgba(45, 48, 58, 0.87);
+    border-radius: 10px;
+    background-color: transparent;
     height: 40px;
+    width: 500px;
 }
+
+.button {
+    width: 200px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid #ad3939;
+    color: #a02f12;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.button:hover {
+
+}
+
+@media screen and (max-width: 375px) {
+    .input {
+        height: 40px;
+        width: 300px;
+        font-size: 12px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+}
+

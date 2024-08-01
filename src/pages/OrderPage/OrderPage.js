@@ -36,7 +36,7 @@ const OrderPage = () => {
         <label htmlFor="">Выберите форму организации</label>
         <select name="" id="" className={styles.input} onChange={(e) => setFormOrg(e.target.value)}>
           <option value="OOO">ООО</option>
-          <option value="IP">ИП</option>
+          <option value="ИП">ИП</option>
         </select>
       </div>
 

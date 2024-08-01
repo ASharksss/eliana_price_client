@@ -78,7 +78,6 @@ const BasketPage = ({
     setGeneralWeight(allWeight)
   }
 
-
   useEffect(() => {
     if (isAuth) {
       HomeService.getBasket().then(data => setItems(data))

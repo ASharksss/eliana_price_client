@@ -12,22 +12,28 @@ const TransportCompany = () => {
   const [transportCompanies, setTransportCompanies] = useState([])
   const [fieldNames, setFieldNames] = useState([])
   const [typeUser, setTypeUser] = useState(1)
-  const [formData, setFormData] = useState({}); // Состояние для хранения значений полей
+  const [formData, setFormData] = useState({
+    "Получатель": "Физическое лицо",
+    "Форма оплаты": "Безналичный расчет",
+    "Получение": "До терминала",
+    "Транспортная компания": ""
+  }); // Состояние для хранения значений полей
 
   const [currentTrCompanyId, setCurrentTrCompanyId] = useState(1)
 
   const handleChange = (e, item) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData); // Выводим JSON в консоль
-    HomeService.createWaybills(formData).then(data => console.log('вроде ок'))
+    takeOrder()
+    // HomeService.createWaybills(formData, orderId).then(data => console.log('вроде ок'))
   };
 
   useEffect(() => {
@@ -48,29 +54,55 @@ const TransportCompany = () => {
     return true;
   });
 
-  console.log(fieldNames)
+  const takeOrder = () => {
+    let check = []
+    for (let key in data) {
+      if (data[key].count === 0) {
+        check.push(data[key])
+      }
+    }
+    if (check.length > 0) {
+      return alert('Вы не можете заказать товары, количество которых равно 0')
+    } else {
+      HomeService.takeOrder(data, formOrg, nameOrg, generalCount, formData).then(data => {
+        navigate('/correctOrder')
+        // setOrderId(data.id)
+      })
+    }
+  }
+  console.log(`data: ${data}`)
   return (
     <form className={styles.wrapper} onSubmit={handleSubmit}>
-      <h1>Данные о доставке</h1>
+      <h1 className={styles.title}>Данные о доставке</h1>
       <div className={styles.input_block}>
         <label className={styles.label} htmlFor="">Тип получателя</label>
-        <select className={styles.input} onChange={e => setTypeUser(parseInt(e.target.value))}>
+        <select className={styles.input} name="Получатель"
+                onChange={e => {
+                  setTypeUser(parseInt(e.target.value))
+                  setFormData(prevState => ({
+                    ...prevState,
+                    "Получатель": parseInt(e.target.value) === 1 ? "Физическое лицо" : "Юридическое лицо",
+                  }));
+                }}>
           <option value={1}>Физическое лицо</option>
           <option value={2}>Юридическое лицо</option>
         </select>
       </div>
 
-
       <div className={styles.input_block}>
-        <label className={styles.label} htmlFor="">Выберите транспортную компанию</label>
+        <label className={styles.label} htmlFor="">Транспортная компания</label>
         <select className={styles.input} onChange={(e) => {
           setCurrentTrCompanyId(e.target.value)
+          setFormData(prevState => ({
+            ...prevState,
+            "Транспортная компания": e.target.item(e.target.value).text,
+          }));
           HomeService.getFieldNames(currentTrCompanyId).then(data => setFieldNames(data))
         }}>
           <option value="">Выберите транспортную компанию</option>
           {
             transportCompanies.map(item => (
-              <option value={item.id}>{item.name}</option>
+              <option name={item.name} value={item.id}>{item.name}</option>
             ))
           }
         </select>
@@ -82,11 +114,12 @@ const TransportCompany = () => {
             <label className={styles.label} htmlFor="">{item.name}</label>
             {
               item.type === 'input' &&
-              <input className={styles.input} name={item.name} type="text" required onChange={(e) => handleChange(e, item)} />
+              <input className={styles.input} name={item.name} type="text" required
+                     onChange={(e) => handleChange(e, item)}/>
             }
             {
               item.type === 'select' &&
-              <select className={styles.input} name={item.name} id="" required onChange={(e) => handleChange(e, item)} >
+              <select className={styles.input} name={item.name} id="" required onChange={(e) => handleChange(e, item)}>
                 {item.field_options.map(option => (
                   <option value={option.name}>{option.name}</option>
                 ))}
@@ -96,7 +129,7 @@ const TransportCompany = () => {
         ))
       }
 
-      <button type='submit'>Отправить</button>
+      <button type='submit' className={styles.button}>Отправить</button>
     </form>
   );
 };

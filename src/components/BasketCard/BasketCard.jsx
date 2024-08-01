@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {GoTrash} from "react-icons/go";
 import styles from './basket_card.module.css'
 import HomeService from "../../services/HomeService";
@@ -12,6 +12,8 @@ const BasketCard = ({
   const [volume, setVolume] = useState(Math.ceil(item.count / item.product.count_in_box) * item.product.volume_in_box)
   const [weight, setWeight] = useState(Math.ceil(item.count / item.product.count_in_box) * item.product.weight_in_box)
   const [price, setPrice] = useState(typeUserId === 1 ? item.product.price_opt * item.count : item.product.price_roz * item.count)
+
+  console.log(item)
 
   useEffect(() => {
     if (!checked) return;
@@ -77,59 +79,66 @@ const BasketCard = ({
     }
   }
 
+  const loadingImage = useMemo((image) => <img
+    src={`https://backend.eliana.pro/static/upload/${item.product.image}.png`} className={styles.image}/>)
+
   useEffect(() => {
     HomeService.updatePrice(item.product.vendor_code, price).then(data => console.log(data))
   }, [price])
 
+
   return (
-    <div className={styles.card}>
+
       <div className='flex'>
+        {loadingImage}
+        <div className={styles.card}>
         <div className='flex'>
-          <p className={styles.value}><b>{item.product.name}</b>
-        </p>
-        </div>
-
-        <div className='flex'>
-          <span className={styles.title}>Цена за шт: </span><p className={styles.value}>
-          {Intl.NumberFormat('ru-RU', {maximumSignificantDigits: 3, style: 'currency', currency: 'RUB'}).format(
-            typeUserId === 1 ? item.product.price_opt : item.product.price_roz
-          )}
-        </p>
-        </div>
-      </div>
-      <div className=''>
-        <div className={styles.bot_block}>
-          <span className={styles.title}>Кол-во, шт: </span>
-          {
-            checked ?
-              <button className={styles.count_btn}
-                      onClick={(e) => handleChange(e, 'decrement', item.product.vendor_code)}>-</button> : null
-          }
-          {
-            checked ? <input type='text' className={styles.input} value={count}
-                             onBlur={() => console.log(item.product.count)}
-                             onChange={(e) => handleChange(e)} disabled/> :
-              <input type='text' className={styles.input} value={count}
-                     onChange={(e) => handleChange(e)}
-                     onBlur={() => HomeService.updateCount(item.product.vendor_code, count)}/>
-          }
-
-          {
-            checked ? <button className={styles.count_btn}
-                              onClick={(e) => handleChange(e, 'increment', item.product.vendor_code)}>+</button> : null
-          }
-        </div>
-
-        <div className={`${styles.bot_block}`}>
-          <span className={styles.title}>Общая стоимость: </span>
-          <p className={styles.value}>
-            {Intl.NumberFormat('ru-RU', {
-              maximumSignificantDigits: 10,
-              style: 'currency',
-              currency: 'RUB'
-            }).format(price)}
+          <div className='flex'>
+            <p className={styles.value}><b>{item.product.name}</b>
+            </p>
+          </div>
+          <div className='flex'>
+            <span className={styles.title}>Цена за шт: </span><p className={styles.value}>
+            {Intl.NumberFormat('ru-RU', {maximumSignificantDigits: 3, style: 'currency', currency: 'RUB'}).format(
+              typeUserId === 1 ? item.product.price_opt : item.product.price_roz
+            )}
           </p>
-          <GoTrash className={styles.trash} onClick={() => handleDeleteItem(item.product.vendor_code)}/>
+          </div>
+        </div>
+        <div>
+          <div className={styles.bot_block}>
+            <span className={styles.title}>Кол-во, шт: </span>
+            {
+              checked ?
+                <button className={styles.count_btn}
+                        onClick={(e) => handleChange(e, 'decrement', item.product.vendor_code)}>-</button> : null
+            }
+            {
+              checked ? <input type='text' className={styles.input} value={count}
+                               onBlur={() => console.log(item.product.count)}
+                               onChange={(e) => handleChange(e)} disabled/> :
+                <input type='text' className={styles.input} value={count}
+                       onChange={(e) => handleChange(e)}
+                       onBlur={() => HomeService.updateCount(item.product.vendor_code, count)}/>
+            }
+
+            {
+              checked ? <button className={styles.count_btn}
+                                onClick={(e) => handleChange(e, 'increment', item.product.vendor_code)}>+</button> : null
+            }
+          </div>
+
+          <div className={`${styles.bot_block}`}>
+            <span className={styles.title}>Общая стоимость: </span>
+            <p className={styles.value}>
+              {Intl.NumberFormat('ru-RU', {
+                maximumSignificantDigits: 10,
+                style: 'currency',
+                currency: 'RUB'
+              }).format(price)}
+            </p>
+            <GoTrash className={styles.trash} onClick={() => handleDeleteItem(item.product.vendor_code)}/>
+          </div>
         </div>
       </div>
 

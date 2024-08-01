@@ -1,5 +1,5 @@
 .card {
-    width: 700px;
+    width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -65,13 +65,17 @@
     color: white;
 }
 
+.image {
+    width: 70px;
+    margin-right: 10px;
+}
+
 @media screen and (max-width: 768px) {
     .card {
         width: 500px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 80px;
         padding: 12px;
     }
 }
@@ -86,7 +90,6 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 80px;
         padding: 12px;
     }
 

@@ -67,9 +67,9 @@ class HomeService {
     return data
   }
 
-  async takeOrder(order, formOrg, nameOrg, generalCount) {
+  async takeOrder(order, formOrg, nameOrg, generalCount, formData) {
     const item = IOrder(order, formOrg, nameOrg, generalCount)
-    const {data} = await axiosWithAuth.post(`/product/sendExcel`, {order: item})
+    const {data} = await axiosWithAuth.post(`/product/sendExcel`, {order: item, formData})
     return data
     /*const item = IOrder(order, formOrg, nameOrg)
     console.log(item)
@@ -92,8 +92,8 @@ class HomeService {
     return data
   }
 
-  async createWaybills(formData) {
-    const {data} = await axiosWithAuth.post(`/transport/createWaybills`, {formData: formData})
+  async createWaybills(formData, orderId ) {
+    const {data} = await axiosWithAuth.post(`/transport/createWaybills`, {formData, orderId})
     return data
   }
 }
