@@ -3,8 +3,8 @@ import {getAccessToken, removeFromStorage} from "./AuthService";
 import userService from "./UserService";
 
 const options = {
-  // baseURL: 'https://backend.eliana.pro/api',
-  baseURL: 'http://192.168.1.121:5001/api',
+  baseURL: 'https://backend.eliana.pro/api',
+  // baseURL: 'http://192.168.1.121:5001/api',
   headers: {
     'Content-Type': 'application/json'
   },

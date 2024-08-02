@@ -17,7 +17,7 @@ const ChangePrice = () => {
 
   const handleSave = () => {
     console.log('Сохраненные данные:', products);
-    HomeService.updatePrices(products).then((data) => console.log('ок'))
+    HomeService.updatePrices(products).then(() => navigate('/'))
   };
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const ChangePrice = () => {
                 type="text"
                 value={item.price_opt}
                 onChange={(e) => {
-                  handlePriceChange(index, 'price_roz', e.target.value)
+                  handlePriceChange(index, 'price_opt', e.target.value)
                 }}
               />
             </div>
