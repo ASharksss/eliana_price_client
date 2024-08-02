@@ -9,6 +9,7 @@ const OrderPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [formOrg, setFormOrg] = useState('OOO')
+  const [paymentType, setPaymentType] = useState('Безналичный расчет')
   const [nameOrg, setNameOrg] = useState(null)
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const OrderPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    navigate('/transportCompany', {state: {data, generalCount, formOrg, nameOrg}})
+    navigate('/transportCompany', {state: {data, generalCount, formOrg, nameOrg, paymentType}})
   }
 
   return (
@@ -46,6 +47,15 @@ const OrderPage = () => {
                onChange={e => setNameOrg(e.target.value)} required={true}/>
       </div>
 
+      <div className={styles.input_block}>
+
+        <label htmlFor="">Вид оплаты</label>
+        <select name="" id="" className={styles.input}
+                onChange={(e) => setPaymentType(e.target.value)}>
+          <option value="Безналичный расчет">Безналичный расчет</option>
+          <option value="Наличный расчет">Наличный расчет</option>
+        </select>
+      </div>
 
       <button className={styles.submit}>Отправить заказ</button>
     </form>

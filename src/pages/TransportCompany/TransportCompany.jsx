@@ -14,7 +14,6 @@ const TransportCompany = () => {
   const [typeUser, setTypeUser] = useState(1)
   const [formData, setFormData] = useState({
     "Получатель": "Физическое лицо",
-    "Форма оплаты": "Безналичный расчет",
     "Получение": "До терминала",
     "Транспортная компания": ""
   }); // Состояние для хранения значений полей
@@ -42,7 +41,7 @@ const TransportCompany = () => {
   }, [])
 
   if (location.state === null) return navigate('/')
-  const {data, generalCount, formOrg, nameOrg} = location.state;
+  const {data, generalCount, formOrg, nameOrg, paymentType} = location.state;
 
   const filteredFields = fieldNames.filter(item => {
     if (typeUser === 1) {
@@ -63,7 +62,7 @@ const TransportCompany = () => {
     if (check.length > 0) {
       return alert('Вы не можете заказать товары, количество которых равно 0')
     } else {
-      HomeService.takeOrder(data, formOrg, nameOrg, generalCount, formData).then(data => {
+      HomeService.takeOrder(data, formOrg, nameOrg, generalCount, formData, paymentType).then(data => {
         navigate('/correctOrder')
         // setOrderId(data.id)
       })

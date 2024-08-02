@@ -10,9 +10,9 @@ export const IBasketItemPrice = (productVendorCode, price) => {
   }
 }
 
-export const IOrder = (order, formOrg, nameOrg, generalCount) => {
+export const IOrder = (order, formOrg, nameOrg, generalCount, paymentType) => {
   return {
-    order, formOrg,nameOrg, generalCount
+    order, formOrg,nameOrg, generalCount, paymentType
   }
 }
 

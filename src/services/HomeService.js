@@ -67,8 +67,8 @@ class HomeService {
     return data
   }
 
-  async takeOrder(order, formOrg, nameOrg, generalCount, formData) {
-    const item = IOrder(order, formOrg, nameOrg, generalCount)
+  async takeOrder(order, formOrg, nameOrg, generalCount, formData, paymentType) {
+    const item = IOrder(order, formOrg, nameOrg, generalCount, paymentType)
     const {data} = await axiosWithAuth.post(`/product/sendExcel`, {order: item, formData})
     return data
     /*const item = IOrder(order, formOrg, nameOrg)
