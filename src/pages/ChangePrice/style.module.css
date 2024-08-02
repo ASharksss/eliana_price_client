@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.block + .block {
+  margin-top: 10px;
+  border-top: 1px solid rgba(182, 178, 178, 0.5);
+}
+
+.vendorCode,
+.name {
+  flex: 0 0 150px; /* Задайте необходимую ширину */
+}
+
+.input_block {
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  width: 100px;
+}
+
+.input {
+  margin-top: 5px;
+  width: 60px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #ad3939;
+  background-color: transparent;
+}
+
+.button {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 2px solid #ad3939;
+  color: #a02f12;
+  font-weight: bold;
+  transition: .25s;
+}
+
+.button:hover{
+  background-color: #a02f12;
+  color: white;
+}

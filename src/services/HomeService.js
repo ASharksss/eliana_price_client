@@ -92,8 +92,18 @@ class HomeService {
     return data
   }
 
-  async createWaybills(formData, orderId ) {
+  async createWaybills(formData, orderId) {
     const {data} = await axiosWithAuth.post(`/transport/createWaybills`, {formData, orderId})
+    return data
+  }
+
+  async getPrices() {
+    const {data} = await axiosWithAuth.get(`/product/getProductPrices`)
+    return data
+  }
+
+  async updatePrices(products) {
+    const {data} = await axiosWithAuth.put(`/product/updatePrice`, {products})
     return data
   }
 }

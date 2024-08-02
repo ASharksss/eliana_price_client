@@ -3,8 +3,8 @@ import {getAccessToken, removeFromStorage} from "./AuthService";
 import userService from "./UserService";
 
 const options = {
-  baseURL: 'https://backend.eliana.pro/api',
-  // baseURL: 'http://192.168.1.121:5001/api',
+  //  baseURL: 'https://backend.eliana.pro/api',
+  baseURL: 'http://192.168.1.121:5001/api',
   headers: {
     'Content-Type': 'application/json'
   },
@@ -15,7 +15,7 @@ const axiosClassic = axios.create(options)
 const axiosWithAuth = axios.create(options)
 
 axiosWithAuth.interceptors.request.use(config => {
-  const accessToken = getAccessToken()
+  const accessToken = getAccessToken() || localStorage.getItem('token')
   if (config?.headers && accessToken)
     config.headers.Authorization = `Bearer ${accessToken}`
   return config

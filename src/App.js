@@ -13,6 +13,7 @@ import Registration from "./pages/Authtentication/Registration";
 import Login from "./pages/Authtentication/Login";
 import AuthProvider from "./context/AuthProvider";
 import TransportCompany from "./pages/TransportCompany/TransportCompany";
+import ChangePrice from "./pages/ChangePrice/ChangePrice";
 
 function App() {
 
@@ -40,10 +41,12 @@ function App() {
               <Route path={'/order'} element={<OrderPage/>}/>
               <Route path={'/transportCompany'} element={<TransportCompany/>}/>
               <Route path={'/correctOrder'} element={<CorrectOrder/>}/>
+              <Route path={'/changePrice'} element={<ChangePrice/>}/>
 
             </Route>
             <Route path={'/create/user'} element={<Registration/>}/>
             <Route path={'/login'} element={<Login/>}/>
+
             <Route path={'*'}  element={<Home/>} />
           </Routes>
         </AuthProvider>

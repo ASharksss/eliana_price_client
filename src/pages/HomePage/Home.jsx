@@ -6,13 +6,13 @@ import HomeService from "../../services/HomeService";
 import {useAuth} from "../../context/AuthProvider";
 
 const Home = () => {
-  const {user} = useAuth();
+  const {isAuth} = useAuth();
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState(1)
   const [basket, setBasket] = useState([])
 
   useEffect(() => {
-    if (user) {
+    if (isAuth) {
       HomeService.getAllProducts(category).then(data => setProducts(data))
       HomeService.getBasket().then(data => setBasket(data))
     } else {

@@ -31,7 +31,7 @@ const TransportCompany = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData); // Выводим JSON в консоль
+    // console.log(formData); // Выводим JSON в консоль
     takeOrder()
     // HomeService.createWaybills(formData, orderId).then(data => console.log('вроде ок'))
   };
@@ -43,7 +43,6 @@ const TransportCompany = () => {
 
   if (location.state === null) return navigate('/')
   const {data, generalCount, formOrg, nameOrg} = location.state;
-  console.log(data, generalCount, formOrg, nameOrg)
 
   const filteredFields = fieldNames.filter(item => {
     if (typeUser === 1) {

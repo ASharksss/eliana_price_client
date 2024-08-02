@@ -5,7 +5,7 @@ import userService from "../services/UserService";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(true)
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("site") || "");
   const navigate = useNavigate();
@@ -26,8 +26,11 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    refreshAction()
-    return () => refreshAction()
+    setUser(JSON.parse(localStorage.getItem('user')))
+    setToken(localStorage.getItem('token'))
+    setIsAuth(true)
+    // refreshAction()
+    // return () => refreshAction()
   }, [])
 
   const loginAction = async (email, password) => {
@@ -36,6 +39,8 @@ const AuthProvider = ({ children }) => {
       if (response.token) {
         setUser(response.profile);
         setToken(response.token);
+        localStorage.setItem('user', JSON.stringify(response.profile))
+        localStorage.setItem('token', response.token)
         setIsAuth(true)
         return {path: lastPath ? lastPath : "/"};
       } else {
