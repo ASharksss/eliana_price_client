@@ -39,8 +39,8 @@ const Card = ({product, basket}) => {
         <span className={styles.price}>{user?.typeUserId === 1 ? product.price_opt : product.price_roz} р.</span>
         {
           added ?
-            <button className={styles.button_added} onClick={addInBasket}>{added ? 'Добавлено' : 'В коризну'}</button> :
-            <button className={styles.button} onClick={addInBasket}>{added ? 'Добавлено' : 'В коризну'}</button>
+            <button className={styles.button_added} onClick={addInBasket}>{added ? 'Добавлено' : 'В корзину'}</button> :
+            <button className={styles.button} onClick={addInBasket}>{added ? 'Добавлено' : 'В корзину'}</button>
         }
       </> : <button className={styles.button} onClick={loginButton}>Войти</button>}
     </div>
