@@ -1,3 +1,10 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /create/user
+Disallow: /profile
+Disallow: /orderList
+Disallow: /order
+Disallow: /basket
+Disallow: /transportCompany
+Disallow: /correctOrder
+Disallow: /changePrice

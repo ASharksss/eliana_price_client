@@ -66,6 +66,10 @@
 }
 
 @media screen and (max-width: 375px) {
+    .imageContainer {
+        width: 170px;
+    }
+
     .card {
         width: 145px;
     }

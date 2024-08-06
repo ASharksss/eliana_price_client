@@ -51,6 +51,13 @@ button {
     margin-top: 60px;
 }
 
+@media screen and (max-width: 1400px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+}
+
 @media screen and (max-width: 1024px) {
     .grid {
         grid-template-columns: repeat(4, 1fr);
@@ -67,7 +74,18 @@ button {
     }
 
     .App {
-        width: 500px;
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .App {
+        width: 100%;
+        padding: 10px;
     }
 }
 
@@ -77,8 +95,7 @@ button {
     }
 
     .App {
-        width: 100%;
-        padding: 10px;
+        width: 100vw;
     }
 }
 
