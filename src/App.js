@@ -14,6 +14,7 @@ import Login from "./pages/Authtentication/Login";
 import AuthProvider from "./context/AuthProvider";
 import TransportCompany from "./pages/TransportCompany/TransportCompany";
 import ChangePrice from "./pages/ChangePrice/ChangePrice";
+import CardPage from "./pages/CardPage/CardPage";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Layout/>}>
               <Route path={'/'} element={<Home/>}/>
+              <Route path={'/:vendor_code'} element={<CardPage/>}/>
               <Route path={'/basket'} element={<BasketPage generalCount={generalCount} generalVolume={generalVolume}
                                                            generalWeight={generalWeight} generalPrice={generalPrice}
                                                            setGeneralPrice={setGeneralPrice}
@@ -42,11 +44,9 @@ function App() {
               <Route path={'/transportCompany'} element={<TransportCompany/>}/>
               <Route path={'/correctOrder'} element={<CorrectOrder/>}/>
               <Route path={'/changePrice'} element={<ChangePrice/>}/>
-
             </Route>
             <Route path={'/create/user'} element={<Registration/>}/>
             <Route path={'/login'} element={<Login/>}/>
-
             <Route path={'*'} element={<Home/>}/>
           </Routes>
         </AuthProvider>

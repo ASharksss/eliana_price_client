@@ -1,5 +1,6 @@
 import {IBasketItemPrice, IBasketItems, IOrder} from '../interfaces'
 import {axiosWithAuth} from "./interceptors";
+import axios from "axios";
 
 class HomeService {
   async getAllProducts(category) {
@@ -104,6 +105,11 @@ class HomeService {
 
   async updatePrices(products) {
     const {data} = await axiosWithAuth.put(`/product/updatePrice`, {products})
+    return data
+  }
+
+  async getProduct(vendor_code) {
+    const {data} = await axiosWithAuth.get(`/product/getOneProduct/${vendor_code}`)
     return data
   }
 }
