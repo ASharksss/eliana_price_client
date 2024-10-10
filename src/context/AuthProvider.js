@@ -26,11 +26,11 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // setUser(JSON.parse(localStorage.getItem('user')))
-    // setToken(localStorage.getItem('token'))
-    // setIsAuth(true)
-    refreshAction()
-    return () => refreshAction()
+    setUser(JSON.parse(localStorage.getItem('user')))
+    setToken(localStorage.getItem('token'))
+    setIsAuth(true)
+    // refreshAction()
+    // return () => refreshAction()
   }, [])
 
   const loginAction = async (email, password) => {
@@ -39,8 +39,8 @@ const AuthProvider = ({ children }) => {
       if (response.token) {
         setUser(response.profile);
         setToken(response.token);
-        // localStorage.setItem('user', JSON.stringify(response.profile))
-        // localStorage.setItem('token', response.token)
+        localStorage.setItem('user', JSON.stringify(response.profile))
+        localStorage.setItem('token', response.token)
         setIsAuth(true)
         return {path: lastPath ? lastPath : "/"};
       } else {
