@@ -5,7 +5,7 @@ import styles from './home.module.css'
 import HomeService from "../../services/HomeService";
 import {useAuth} from "../../context/AuthProvider";
 
-const Home = () => {
+const Home = ({added, setAdded}) => {
   const {user} = useAuth();
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState(1)
@@ -19,7 +19,6 @@ const Home = () => {
       HomeService.getAllProductsAnon(category).then(data => setProducts(data))
     }
   }, [category])
-
 
   return (
     <div>
@@ -39,7 +38,7 @@ const Home = () => {
         {
           products.map(product => (
             <React.Fragment key={product.vendor_code}>
-              <Card product={product} basket={basket}/>
+              <Card setAdded={setAdded} added={added} product={product} basket={basket}/>
             </React.Fragment>
           ))
         }

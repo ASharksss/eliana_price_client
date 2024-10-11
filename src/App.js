@@ -22,6 +22,7 @@ function App() {
   const [generalVolume, setGeneralVolume] = useState(0)
   const [generalWeight, setGeneralWeight] = useState(0)
   const [generalPrice, setGeneralPrice] = useState(0)
+  const [added, setAdded] = useState(false)
 
   return (
     <div className="App montserrat">
@@ -29,8 +30,8 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path='/' element={<Layout/>}>
-              <Route path={'/'} element={<Home/>}/>
-              <Route path={'/:vendor_code'} element={<CardPage/>}/>
+              <Route path={'/'} element={<Home />}/>
+              <Route path={'/:vendor_code'} element={<CardPage added={added} setAdded={setAdded}/>}/>
               <Route path={'/basket'} element={<BasketPage generalCount={generalCount} generalVolume={generalVolume}
                                                            generalWeight={generalWeight} generalPrice={generalPrice}
                                                            setGeneralPrice={setGeneralPrice}

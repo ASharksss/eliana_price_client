@@ -112,6 +112,11 @@ class HomeService {
     const {data} = await axiosWithAuth.get(`/product/getOneProduct/${vendor_code}`)
     return data
   }
+
+  async getSimilarProduct(vendor_code) {
+    const {data} = await axiosWithAuth.get(`/product/getSimilarProduct/${vendor_code}`)
+    return data
+  }
 }
 
 export default new HomeService()

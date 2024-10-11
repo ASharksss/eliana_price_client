@@ -32,7 +32,7 @@ const Card = ({product, basket}) => {
   return (
 
       <div className={styles.card}>
-        <NavLink to={`/${product.vendor_code}`} state={{product}} className={styles.link} >
+        <NavLink to={`/${product.vendor_code}`} className={styles.link} >
         <p className={styles.name}>{product.name}</p>
         <div className={styles.imageContainer}>
           {/*<img src={`http://localhost:5000/static/upload/${product.image}.png`} alt={product.name} className={styles.img} loading={'lazy'}/>*/}
