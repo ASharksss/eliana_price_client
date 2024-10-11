@@ -10,7 +10,7 @@ const Layout = () => {
     }
   }, [location.pathname])
   return (
-    <div>
+    <div className='wrapper'>
       <Header/>
       <Outlet/>
     </div>
