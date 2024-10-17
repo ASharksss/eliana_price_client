@@ -111,8 +111,8 @@ const BasketPage = ({
 
   return (
     <div className={styles.wrapper}>
-      <PreOrder generalCount={generalCount} generalVolume={generalVolume} generalWeight={generalWeight}
-                generalPrice={generalPrice}/>
+
+
       <div className={styles.block}>
         <h1>Введите данные о количестве</h1>
 
@@ -181,7 +181,10 @@ const BasketPage = ({
 
         <FloatButton.BackTop/>
       </div>
-
+      <aside className={styles.preOrderWrapper}>
+        <PreOrder generalCount={generalCount} generalVolume={generalVolume} generalWeight={generalWeight}
+                  generalPrice={generalPrice}/>
+      </aside>
     </div>
   );
 };

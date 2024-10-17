@@ -46,10 +46,10 @@ const ProfilePage = () => {
           <button key="back" type={'button'} className={styles.button} onClick={handleCancel}>Закрыть</button>
         ]}
       >
-        <ChangePassword form={form} />
+        <ChangePassword form={form}/>
       </Modal>
       <div className={styles.order_history}>
-        <h1 className={styles.title}> История заказов</h1>
+        <h1 className={styles.title}>История заказов</h1>
         {
           orders.length === 0 ? 'Пока нет заказов' : null
         }

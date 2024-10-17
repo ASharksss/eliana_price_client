@@ -56,7 +56,6 @@ const CardPage = () => {
     };
   }, []);
 
-  console.log(added)
   return (
     <>
       <h1 className={styles.title}>{product?.name}</h1>
