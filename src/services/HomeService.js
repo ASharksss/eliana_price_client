@@ -117,6 +117,19 @@ class HomeService {
     const {data} = await axiosWithAuth.get(`/product/getSimilarProduct/${vendor_code}`)
     return data
   }
+
+  async checkExcel(formData) {
+    const {data} = await axiosWithAuth.post(`/product/checkExcel`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+    })
+    return data
+  }
+  async fillOutBasket(res) {
+    const {data} = await axiosWithAuth.post(`/product/fillOutBasket`, res)
+    return data
+  }
 }
 
 export default new HomeService()

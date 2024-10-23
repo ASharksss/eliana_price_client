@@ -13,7 +13,6 @@ const BasketCard = ({
   const [weight, setWeight] = useState(Math.ceil(item.count / item.product.count_in_box) * item.product.weight_in_box)
   const [price, setPrice] = useState(typeUserId === 1 ? item.product.price_opt * item.count : item.product.price_roz * item.count)
 
-  console.log(item)
 
   useEffect(() => {
     if (!checked) return;
@@ -28,6 +27,8 @@ const BasketCard = ({
     setWeight(0)
     setPrice(0)
   }, [checked])
+
+  useEffect(() => setCount(item.count), [item.count])
 
   const handleChange = async (e, type, vendor_code) => {
     if (!checked) {
@@ -83,6 +84,7 @@ const BasketCard = ({
     src={`https://backend.eliana.pro/static/upload/${item.product.image}.png`} className={styles.image}/>)
 
   useEffect(() => {
+    if (price !== 0)
     HomeService.updatePrice(item.product.vendor_code, price).then(data => console.log(data))
   }, [price])
 

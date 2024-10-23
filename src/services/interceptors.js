@@ -4,7 +4,7 @@ import userService from "./UserService";
 
 const options = {
  // baseURL: 'https://backend.eliana.pro/api',
-  baseURL: 'http://192.168.0.100:5001/api',
+  baseURL: 'http://192.168.0.101:5001/api',
   headers: {
     'Content-Type': 'application/json'
   },

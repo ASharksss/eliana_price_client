@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './basket_page.module.css'
-import {FloatButton} from 'antd';
+import {FloatButton, Modal} from 'antd';
 import BasketCard from "../../components/BasketCard/BasketCard";
 import Checkbox from "../../ui/Checkbox";
 import PreOrder from "../../components/PreOrder/PreOrder";
@@ -9,13 +9,21 @@ import {useAuth} from "../../context/AuthProvider";
 import {useNavigate} from "react-router-dom";
 
 const BasketPage = ({
-                      generalCount, generalVolume, generalWeight,
-                      generalPrice, setGeneralCount, setGeneralVolume,
-                      setGeneralWeight, setGeneralPrice
+                      generalCount,
+                      generalVolume,
+                      generalWeight,
+                      generalPrice,
+                      setGeneralCount,
+                      setGeneralVolume,
+                      setGeneralWeight,
+                      setGeneralPrice
                     }) => {
   const {isAuth} = useAuth()
   const navigate = useNavigate()
   const [items, setItems] = useState([])
+  const [showModal, setShowModal] = useState(false)
+  const [uploadItems, setUploadItems] = useState()
+  const [file, setFile] = useState(null)
   const [checked, setChecked] = useState({
     wicks: false, sprays: false, diffusers: false, bags: false
   })
@@ -101,91 +109,111 @@ const BasketPage = ({
     await HomeService.deleteInBasket(productVendorCode).then(async () => await HomeService.getBasket().then(data => setItems(data)))
   }
 
-  if (items.length === 0) {
-    return (
-      <div>
-        <p>Корзина пустая</p>
-      </div>
-    )
+  const handleUploadFile = (e) => {
+    Modal.confirm({
+      title: 'Подтверждение загрузки',
+      content: 'После загрузки, все товары удалятся из корзины',
+      onOk: async () => {
+        setItems([])
+        const formData = new FormData()
+        formData.append('file', file)
+        await HomeService.checkExcel(formData).then(async (res) =>
+          await HomeService.fillOutBasket(res.data).then(async (response) => setUploadItems(response)))
+      }
+    })
   }
 
   return (
-    <div className={styles.wrapper}>
+    <>
+      <button onClick={() => setShowModal(!showModal)}>Заказать через Excel</button>
+      <Modal
+        open={showModal}
+        onCancel={() => setShowModal(false)}
+        title={"Загрузите эксель файл"}
+        footer={[<button onClick={handleUploadFile}>Загрузить</button>,
+          <button onClick={async () => {
+            setShowModal(false)
+            await HomeService.getBasket().then(data => {
+              setItems(data)
+              setUploadItems(null)
+            })
+          }}> Закрыть </button>]}
+      >
+        <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
+        <div>
+          {
+            uploadItems?.notAddedItems.map(item => (
+              <>
+                <span>{item}</span><br/>
+              </>
 
+            ))
+          }
+        </div>
 
-      <div className={styles.block}>
-        <h1>Введите данные о количестве</h1>
+      </Modal>
+      {items.length === 0 ?
+        <p>Корзина пустая</p> :
+        <div className={styles.wrapper}>
+          <div className={styles.block}>
+            <h1>Введите данные о количестве</h1>
 
-        {types.wicks.length > 0 ?
-          <div className='category_block'>
-            <div className="flex_usually">
-              <h1>Фитиля</h1>
-              <Checkbox type={'wicks'} typeUserId={typeUserId} checked={checked.wicks} setChecked={setChecked}/>
-            </div>
-            {
-              types.wicks?.map(wick => (
-                <BasketCard item={wick} checked={checked.wicks} typeUserId={typeUserId}
-                            setGeneralCount={setGeneralCount} generalCount={generalCount}
-                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}
-                            setGeneralPrice={setGeneralPrice} handleDeleteItem={handleDeleteItem}/>
-              ))
-            }
-          </div> : null}
+            {types.wicks.length > 0 ? <div className='category_block'>
+              <div className="flex_usually">
+                <h1>Фитиля</h1>
+                <Checkbox type={'wicks'} typeUserId={typeUserId} checked={checked.wicks} setChecked={setChecked}/>
+              </div>
+              {types.wicks?.map(wick => (<BasketCard item={wick} checked={checked.wicks} typeUserId={typeUserId}
+                                                     setGeneralCount={setGeneralCount} generalCount={generalCount}
+                                                     setGeneralVolume={setGeneralVolume}
+                                                     setGeneralWeight={setGeneralWeight}
+                                                     setGeneralPrice={setGeneralPrice}
+                                                     handleDeleteItem={handleDeleteItem}/>))}
+            </div> : null}
 
-        {types.sprays.length > 0 ?
-          <div className='category_block'>
-            <div className="flex_usually"><h1>Диффузоры</h1>
-              <Checkbox type={'sprays'} checked={checked.sprays} setChecked={setChecked}/>
-            </div>
-            {
-              types.sprays?.map(spray => (
-                <BasketCard item={spray} checked={checked.sprays} typeUserId={typeUserId}
-                            setGeneralCount={setGeneralCount} setGeneralPrice={setGeneralPrice}
-                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}
-                            handleDeleteItem={handleDeleteItem}/>
-              ))
-            }
-          </div> : null
-        }
+            {types.sprays.length > 0 ? <div className='category_block'>
+              <div className="flex_usually"><h1>Диффузоры</h1>
+                <Checkbox type={'sprays'} checked={checked.sprays} setChecked={setChecked}/>
+              </div>
+              {types.sprays?.map(spray => (<BasketCard item={spray} checked={checked.sprays} typeUserId={typeUserId}
+                                                       setGeneralCount={setGeneralCount}
+                                                       setGeneralPrice={setGeneralPrice}
+                                                       setGeneralVolume={setGeneralVolume}
+                                                       setGeneralWeight={setGeneralWeight}
+                                                       handleDeleteItem={handleDeleteItem}/>))}
+            </div> : null}
 
-        {types.diffusers.length > 0 ?
-          <div className='category_block'>
-            <div className="flex_usually"><h1>Спреи</h1><Checkbox type={'diffusers'} checked={checked.diffusers}
-                                                                  setChecked={setChecked}/></div>
-            {
-              types.diffusers?.map(diffuser => (
+            {types.diffusers.length > 0 ? <div className='category_block'>
+              <div className="flex_usually"><h1>Спреи</h1><Checkbox type={'diffusers'} checked={checked.diffusers}
+                                                                    setChecked={setChecked}/></div>
+              {types.diffusers?.map(diffuser => (
                 <BasketCard item={diffuser} checked={checked.diffusers} typeUserId={typeUserId}
                             setGeneralCount={setGeneralCount} setGeneralPrice={setGeneralPrice}
                             setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}
-                            handleDeleteItem={handleDeleteItem}/>
-              ))
-            }
-          </div> : null
-        }
+                            handleDeleteItem={handleDeleteItem}/>))}
+            </div> : null}
 
-        {types.bags.length > 0 ?
-          <div className='category_block'>
-            <div className="flex_usually"><h1>Саше</h1><Checkbox type={'bags'} checked={checked.bags}
-                                                                 setChecked={setChecked}/></div>
+            {types.bags.length > 0 ? <div className='category_block'>
+              <div className="flex_usually"><h1>Саше</h1><Checkbox type={'bags'} checked={checked.bags}
+                                                                   setChecked={setChecked}/></div>
 
-            {
-              types.bags?.map(bag => (
-                <BasketCard item={bag} checked={checked.bags} typeUserId={typeUserId}
-                            setGeneralCount={setGeneralCount} setGeneralPrice={setGeneralPrice}
-                            setGeneralVolume={setGeneralVolume} setGeneralWeight={setGeneralWeight}
-                            handleDeleteItem={handleDeleteItem}/>
-              ))
-            }
-          </div> : null
-        }
+              {types.bags?.map(bag => (<BasketCard item={bag} checked={checked.bags} typeUserId={typeUserId}
+                                                   setGeneralCount={setGeneralCount} setGeneralPrice={setGeneralPrice}
+                                                   setGeneralVolume={setGeneralVolume}
+                                                   setGeneralWeight={setGeneralWeight}
+                                                   handleDeleteItem={handleDeleteItem}/>))}
+            </div> : null}
 
-        <FloatButton.BackTop/>
-      </div>
-      <aside className={styles.preOrderWrapper}>
-        <PreOrder generalCount={generalCount} generalVolume={generalVolume} generalWeight={generalWeight}
-                  generalPrice={generalPrice}/>
-      </aside>
-    </div>
+            <FloatButton.BackTop/>
+          </div>
+          <aside className={styles.preOrderWrapper}>
+            <PreOrder generalCount={generalCount} generalVolume={generalVolume} generalWeight={generalWeight}
+                      generalPrice={generalPrice}/>
+          </aside>
+        </div>
+      }
+    </>
+
   );
 };
 

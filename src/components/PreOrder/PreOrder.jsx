@@ -19,6 +19,7 @@ const PreOrder = ({generalCount, generalWeight, generalVolume, generalPrice}) =>
       <NavLink to='/preview' state={generalCount} className={styles.button_link}>
         <button className={styles.button} >Оформить заказ</button>
       </NavLink>
+
     </div>
   );
 };

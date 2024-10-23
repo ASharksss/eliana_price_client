@@ -1,5 +1,5 @@
 
-export const IMAGE_URL = `http://192.168.0.100:5001/`
+export const IMAGE_URL = `http://192.168.0.101:5001/`
 
 export function pluralRusVariant(x) {
   let lastTwoDigits = x % 100;
