@@ -142,7 +142,6 @@ const BasketPage = ({
     }
   };
 
-
   return (
     <>
       <button onClick={() => setShowModal(!showModal)} className={styles.button_excel}>Заказать через Excel</button>
@@ -180,7 +179,6 @@ const BasketPage = ({
         <div className={styles.wrapper}>
           <div className={styles.block}>
             <h1>Введите данные о количестве</h1>
-
             {types.wicks.length > 0 ? <div className='category_block'>
               <div className="flex_usually">
                 <h1>Фитиля</h1>
@@ -193,7 +191,6 @@ const BasketPage = ({
                                                      setGeneralPrice={setGeneralPrice}
                                                      handleDeleteItem={handleDeleteItem}/>))}
             </div> : null}
-
             {types.sprays.length > 0 ? <div className='category_block'>
               <div className="flex_usually"><h1>Диффузоры</h1>
                 <Checkbox type={'sprays'} checked={checked.sprays} setChecked={setChecked}/>
@@ -205,7 +202,6 @@ const BasketPage = ({
                                                        setGeneralWeight={setGeneralWeight}
                                                        handleDeleteItem={handleDeleteItem}/>))}
             </div> : null}
-
             {types.diffusers.length > 0 ? <div className='category_block'>
               <div className="flex_usually"><h1>Спреи</h1><Checkbox type={'diffusers'} checked={checked.diffusers}
                                                                     setChecked={setChecked}/></div>
@@ -226,7 +222,6 @@ const BasketPage = ({
                                                    setGeneralWeight={setGeneralWeight}
                                                    handleDeleteItem={handleDeleteItem}/>))}
             </div> : null}
-
             <FloatButton.BackTop/>
           </div>
           <aside className={styles.preOrderWrapper}>
