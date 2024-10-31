@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Layout/>}>
               <Route path={'/'} element={<Home />}/>
-              <Route path={'/:vendor_code'} element={<CardPage added={added} setAdded={setAdded}/>}/>
+              {/*<Route path={'/:vendor_code'} element={<CardPage added={added} setAdded={setAdded}/>}/>*/}
               <Route path={'/basket'} element={<BasketPage generalCount={generalCount} generalVolume={generalVolume}
                                                            generalWeight={generalWeight} generalPrice={generalPrice}
                                                            setGeneralPrice={setGeneralPrice}

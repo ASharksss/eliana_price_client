@@ -130,6 +130,13 @@ class HomeService {
     const {data} = await axiosWithAuth.post(`/product/fillOutBasket`, res)
     return data
   }
+
+  async downloadVendorCode() {
+    const {data} = await axiosWithAuth.get(`/product/exportVendorCodes`, {
+      responseType: 'blob'
+    })
+    return data
+  }
 }
 
 export default new HomeService()

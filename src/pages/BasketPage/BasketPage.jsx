@@ -7,6 +7,7 @@ import PreOrder from "../../components/PreOrder/PreOrder";
 import HomeService from "../../services/HomeService";
 import {useAuth} from "../../context/AuthProvider";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const BasketPage = ({
                       generalCount,
@@ -112,7 +113,7 @@ const BasketPage = ({
   const handleUploadFile = (e) => {
     Modal.confirm({
       title: 'Подтверждение загрузки',
-      content: 'После загрузки, все товары удалятся из корзины',
+      content: 'Если в Вашей корзине уже есть товары, то они пропадут и заменятся на товары из Excel-файла',
       onOk: async () => {
         setItems([])
         const formData = new FormData()
@@ -123,15 +124,36 @@ const BasketPage = ({
     })
   }
 
+  const handleDownload = async () => {
+    try {
+      await HomeService.downloadVendorCode().then(response => {
+        // Создание ссылки для скачивания
+        const url = window.URL.createObjectURL(new Blob([response]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'users.xlsx'); // Название файла
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      })
+    } catch (error) {
+      console.error(error);
+      alert('Ошибка при скачивании файла');
+    }
+  };
+
+
   return (
     <>
-      <button onClick={() => setShowModal(!showModal)}>Заказать через Excel</button>
+      <button onClick={() => setShowModal(!showModal)} className={styles.button_excel}>Заказать через Excel</button>
+      <button onClick={handleDownload} className={styles.button_excel}>Выгрузить артикулы</button>
       <Modal
         open={showModal}
         onCancel={() => setShowModal(false)}
         title={"Загрузите эксель файл"}
-        footer={[<button onClick={handleUploadFile}>Загрузить</button>,
-          <button onClick={async () => {
+        footer={[
+          <button onClick={handleUploadFile} className={styles.modal_button}>Загрузить</button>,
+          <button className={styles.modal_button} onClick={async () => {
             setShowModal(false)
             await HomeService.getBasket().then(data => {
               setItems(data)
@@ -139,12 +161,13 @@ const BasketPage = ({
             })
           }}> Закрыть </button>]}
       >
+        <p className={styles.modal_warning}>Первая строка в файле - обязательно должна содержать заголовки "Артикул" и "Количество"!</p>
         <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
-        <div>
+        <div className={styles.notfound}>
           {
             uploadItems?.notAddedItems.map(item => (
               <>
-                <span>{item}</span><br/>
+                <span>Артикул не найден: {item}</span><br/>
               </>
 
             ))

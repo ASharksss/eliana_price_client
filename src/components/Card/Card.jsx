@@ -32,13 +32,13 @@ const Card = ({product, basket}) => {
   return (
 
       <div className={styles.card}>
-        <NavLink to={`/${product.vendor_code}`} className={styles.link} >
+        {/*<NavLink to={`/${product.vendor_code}`} className={styles.link} >*/}
         <p className={styles.name}>{product.name}</p>
         <div className={styles.imageContainer}>
           {/*<img src={`http://localhost:5000/static/upload/${product.image}.png`} alt={product.name} className={styles.img} loading={'lazy'}/>*/}
           {loadingImage}
         </div>
-        </NavLink>
+        {/*</NavLink>*/}
         {product?.price_opt ? <>
           <span className={styles.price}>{user?.typeUserId === 1 ? product.price_opt : product.price_roz} р.</span>
           {

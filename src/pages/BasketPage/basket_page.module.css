@@ -17,6 +17,46 @@
     position: relative;
 }
 
+.modal_warning {
+    color: #a16923;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.notfound {
+    margin-top: 10px;
+    color: #b20e0e;
+}
+
+
+.button_excel {
+    padding: 10px 15px;
+    margin-bottom: 30px;
+    background-color: transparent;
+    border: 2px solid #ad3939;
+    border-radius: 10px;
+    color: #a02f12;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.button_excel:hover{
+    background-color: #a02f12;
+    color: white;
+}
+
+.button_excel + .button_excel {
+    margin-left: 10px;
+}
+
+.modal_button {
+    padding: 5px 10px;
+}
+
+.modal_button + .modal_button {
+    margin-left: 10px;
+}
+
 @media screen and (max-width: 1024px) {
     .wrapper {
         display: flex;
